@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { faresData, getFaresByOperator } from "./lib/fares";
+import { getFaresByOperator } from "./lib/fares";
+import PriceChangeAlert from "./components/PriceChangeAlert";
 
 export const metadata: Metadata = {
   title: "Tarife transport public București 2026 — STB și Metrorex | Navetist",
@@ -80,6 +81,12 @@ export default function Home() {
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
                 {op.description}
               </p>
+
+              {op.key === "metrorex" && (
+                <div className="mb-3">
+                  <PriceChangeAlert />
+                </div>
+              )}
 
               <div className="mt-auto flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-800 pt-3">
                 <span>{fares.length} tipuri de bilete</span>

@@ -1,12 +1,15 @@
 import type { Fare } from "../types/fares";
 import FareCard from "./FareCard";
 
+type PendingChange = { newPrice: number };
+
 type Props = {
   title: string;
   fares: Fare[];
+  pendingChanges?: Record<string, PendingChange>;
 };
 
-export default function FareGroup({ title, fares }: Props) {
+export default function FareGroup({ title, fares, pendingChanges }: Props) {
   if (fares.length === 0) return null;
 
   return (
@@ -16,7 +19,11 @@ export default function FareGroup({ title, fares }: Props) {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {fares.map((fare) => (
-          <FareCard key={fare.id} fare={fare} />
+          <FareCard
+            key={fare.id}
+            fare={fare}
+            pendingChange={pendingChanges?.[fare.id]}
+          />
         ))}
       </div>
     </section>
