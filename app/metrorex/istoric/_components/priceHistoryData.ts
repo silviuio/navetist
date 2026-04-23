@@ -1,4 +1,4 @@
-import priceHistory from "../../data/metrorex-price-history.json";
+import priceHistory from "../../../data/metrorex-price-history.json";
 
 export type PriceHistoryEntry = {
   date: string;

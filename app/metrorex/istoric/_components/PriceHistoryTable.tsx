@@ -21,7 +21,7 @@ export default function PriceHistoryTable() {
           </tr>
         </thead>
         <tbody>
-          {priceHistoryData.map((entry, i) => (
+          {[...priceHistoryData].reverse().map((entry, i) => (
             <tr
               key={i}
               className={`border-b border-zinc-800/60 last:border-0 ${entry.upcoming ? "bg-orange-500/5" : ""}`}

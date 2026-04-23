@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import PriceChart from "../../components/metrorex-istoric/PriceChart";
-import PriceHistoryTable from "../../components/metrorex-istoric/PriceHistoryTable";
+import PriceChart from "./_components/PriceChart";
+import PriceHistoryTable from "./_components/PriceHistoryTable";
 
 export const metadata: Metadata = {
   title: "Evoluția prețului biletului de metrou București 2000–2026 | Navetist",
