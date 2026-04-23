@@ -264,6 +264,7 @@
       "name": "Abonament metropolitan și metrou 7 zile",
       "price": 66,
       "duration": { "value": 7, "unit": "days" },
+      "activationRequired": true,
       "nominalRequired": true,
       "activationWindowMinutes": 15
     },

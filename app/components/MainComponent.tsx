@@ -1,18 +1,11 @@
-import fares from "../data/fares.json";
+import { faresData } from "../lib/fares";
 import FareCard from "./FareCard";
 
 const MainComponent = () => {
   return (
-    <div>
-      {fares.fares.map((fare) => (
-        <div className="mb-4" key={fare.id}>
-          <FareCard
-            name={fare.name}
-            price={fare.price}
-            trips={fare.trips}
-            validityMinutes={fare.validityMinutes}
-          />
-        </div>
+    <div className="space-y-4">
+      {faresData.fares.map((fare) => (
+        <FareCard key={fare.id} fare={fare} />
       ))}
     </div>
   );
