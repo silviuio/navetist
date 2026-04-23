@@ -16,8 +16,9 @@ const pendingChanges = Object.fromEntries(
 export default function MetrorexPage() {
   const fares = getFaresByOperator("metrorex");
   const trips = fares.filter((f) => f.category === "trip");
-  const timePasses = fares.filter((f) => f.category === "time-pass");
-  const subscriptions = fares.filter((f) => f.category === "subscription");
+  const subscriptions = fares.filter(
+    (f) => f.category === "time-pass" || f.category === "subscription"
+  );
 
   return (
     <div>
@@ -49,7 +50,6 @@ export default function MetrorexPage() {
 
       <div className="space-y-8">
         <FareGroup title="Călătorii" fares={trips} pendingChanges={pendingChanges} />
-        <FareGroup title="Abonamente timp" fares={timePasses} pendingChanges={pendingChanges} />
         <FareGroup title="Abonamente" fares={subscriptions} pendingChanges={pendingChanges} />
       </div>
     </div>

@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 export default function IntegratPage() {
   const fares = getFaresByOperator("integrated");
   const trips = fares.filter((f) => f.category === "trip");
-  const timePasses = fares.filter((f) => f.category === "time-pass");
-  const subscriptions = fares.filter((f) => f.category === "subscription");
+  const subscriptions = fares.filter(
+    (f) => f.category === "time-pass" || f.category === "subscription"
+  );
 
   return (
     <div>
@@ -31,7 +32,6 @@ export default function IntegratPage() {
 
       <div className="space-y-8">
         <FareGroup title="Călătorii" fares={trips} />
-        <FareGroup title="Abonamente timp" fares={timePasses} />
         <FareGroup title="Abonamente" fares={subscriptions} />
       </div>
     </div>

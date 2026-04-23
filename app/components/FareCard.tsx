@@ -48,7 +48,7 @@ const FareCard = ({ fare, pendingChange }: Props) => {
         </div>
       </div>
 
-      <div className="border-l border-white/10 flex flex-col items-center justify-center px-4 min-w-[80px] gap-1">
+      <div className="border-l border-white/10 flex flex-col items-center justify-center px-4 w-24 shrink-0 gap-1">
         <span className={`text-lg font-bold whitespace-nowrap ${pendingChange ? "line-through text-white/40 text-sm" : ""}`}>
           {fare.price} RON
         </span>
