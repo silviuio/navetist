@@ -42,7 +42,9 @@ const FareCard = ({ fare, pendingChange }: Props) => {
       ? getSingleTripFare(fare.operator)
       : undefined;
   const isIntegratedSub = isSubscription && fare.operator === "integrated";
-  const stbSingleTripFare = isIntegratedSub ? getSingleTripFare("stb") : undefined;
+  const stbSingleTripFare = isIntegratedSub
+    ? getSingleTripFare("stb")
+    : undefined;
   const metroSingleTripFare = isIntegratedSub
     ? getSingleTripFare("metrorex")
     : undefined;
@@ -88,7 +90,8 @@ const FareCard = ({ fare, pendingChange }: Props) => {
             <>
               <p className="flex items-center gap-1">
                 <Clock size={12} className="shrink-0" />
-                {fare.duration.value} {unitRo(fare.duration.value, fare.duration.unit)}
+                {fare.duration.value}{" "}
+                {unitRo(fare.duration.value, fare.duration.unit)}
               </p>
               {fare.nominalRequired && (
                 <p className="flex items-center gap-1">
@@ -102,7 +105,10 @@ const FareCard = ({ fare, pendingChange }: Props) => {
 
         {singleOperatorTripFare && (
           <div className="mt-auto pt-3">
-            <BreakevenCalculator fare={fare} tripFare={singleOperatorTripFare} />
+            <BreakevenCalculator
+              fare={fare}
+              tripFare={singleOperatorTripFare}
+            />
           </div>
         )}
 
