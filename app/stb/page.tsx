@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import FareGroup from "../components/FareGroup";
 import { getFaresByOperator } from "../lib/fares";
+
+export const metadata: Metadata = {
+  title: "Prețuri STB 2026 — Bilete și abonamente transport suprafață București | Navetist",
+  description:
+    "Tarife actuale STB: bilet 1 călătorie, 2 și 10 călătorii, abonamente 24h, 72h, 7 zile, lunar, 6 luni și 12 luni pentru transportul de suprafață în București și Ilfov.",
+};
 
 export default function StbPage() {
   const fares = getFaresByOperator("stb");

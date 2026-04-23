@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import FareGroup from "../components/FareGroup";
 import { getFaresByOperator } from "../lib/fares";
+
+export const metadata: Metadata = {
+  title: "Prețuri Metrorex 2026 — Bilete și abonamente metrou București | Navetist",
+  description:
+    "Tarife actuale Metrorex: bilet 1, 2 și 10 călătorii, abonamente 24h, 72h, săptămânal, lunar, 6 luni și anual pentru metroul din București.",
+};
 
 export default function MetrorexPage() {
   const fares = getFaresByOperator("metrorex");

@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { faresData } from "../lib/fares";
+
+export const metadata: Metadata = {
+  title: "Surse de date — Tarife STB și Metrorex | Navetist",
+  description: "Sursele oficiale folosite pentru tarifele afișate pe Navetist: STB și Metrorex.",
+};
 
 const sources = [
   {

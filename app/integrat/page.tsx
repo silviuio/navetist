@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import FareGroup from "../components/FareGroup";
 import { getFaresByOperator } from "../lib/fares";
+
+export const metadata: Metadata = {
+  title: "Tarife integrate STB + Metrorex 2026 — Bilete metropolitane București | Navetist",
+  description:
+    "Prețuri bilete și abonamente metropolitane valabile pe suprafață și metrou: 1, 2, 10 călătorii și abonamente 24h, 72h, 7 zile, lunar, 6 luni și 12 luni.",
+};
 
 export default function IntegratPage() {
   const fares = getFaresByOperator("integrated");
