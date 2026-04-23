@@ -106,6 +106,23 @@ export default function BreakevenCalculator(props: Props) {
     ? Math.ceil(basePrice / effectiveSinglePrice)
     : null;
 
+  // La deschiderea dialog-ului, counter-ele pornesc la prag:
+  // - single-operator: exact breakeven
+  // - integrated: split 50/50 STB/Metrorex astfel încât costul total ≈ basePrice
+  const integratedSplit =
+    integrated && effectiveStbPrice + effectiveMetroPrice > 0
+      ? Math.max(1, Math.round(basePrice / (effectiveStbPrice + effectiveMetroPrice)))
+      : null;
+
+  function openDialog() {
+    if (breakeven !== null) setSingleTrips(breakeven);
+    if (integratedSplit !== null) {
+      setStbTrips(integratedSplit);
+      setMetroTrips(integratedSplit);
+    }
+    setOpen(true);
+  }
+
   const currentCost = integrated
     ? stbTrips * effectiveStbPrice + metroTrips * effectiveMetroPrice
     : singleTrips * effectiveSinglePrice;
@@ -122,7 +139,7 @@ export default function BreakevenCalculator(props: Props) {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          setOpen(true);
+          openDialog();
         }}
         className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/10 hover:bg-white/15 text-white px-3 py-1.5 rounded-full transition-colors w-fit"
       >
