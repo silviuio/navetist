@@ -40,26 +40,6 @@ function periodLabel(fare: Fare): string {
   return "perioadă";
 }
 
-function compactFareName(fare: Fare): string {
-  if (fare.category !== "subscription" && fare.category !== "time-pass") {
-    return fare.name;
-  }
-
-  if (fare.duration.unit === "months" && fare.duration.value === 1) {
-    return "Abonament lunar integrat";
-  }
-
-  if (fare.duration.unit === "days" && fare.duration.value === 7) {
-    return "Abonament integrat 7 zile";
-  }
-
-  if (fare.duration.unit === "hours") {
-    return `Abonament integrat ${fare.duration.value}h`;
-  }
-
-  return fare.name.replace("metropolitan și metrou", "integrat");
-}
-
 function formatRon(value: number): string {
   return `${value.toLocaleString("ro-RO", {
     maximumFractionDigits: value % 1 === 0 ? 0 : 2,
@@ -148,7 +128,7 @@ export default function IntegratedBreakevenDialog({
           <DialogHeader>
             <div className="flex items-start justify-between gap-4">
               <DialogTitle className="text-white text-lg">
-                {compactFareName(fare)}
+                {fare.name}
               </DialogTitle>
               <span className="text-lg font-bold text-white tabular-nums whitespace-nowrap">
                 {formatRon(basePrice)}
