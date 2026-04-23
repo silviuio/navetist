@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "lastUpdated": "2026-04-22",
+    "currency": "RON",
+    "sources": {
+      "stb": "https://stbsa.ro/...",
+      "metrorex": "https://metrorex.ro/..."
+    }
+  },
+  "operators": {
+    "stb": { "name": "STB", "fullName": "Societatea de Transport București" },
+    "metrorex": { "name": "Metrorex", "fullName": "Metrorex S.A." },
+    "integrated": { "name": "Metropolitan", "fullName": "STB + Metrorex integrat" }
+  },
+  "fares": [
+    {
+      "id": "stb-trip-single",
+      "operator": "stb",
+      "category": "trip",
+      "name": "1 călătorie",
+      "price": 3,
+      "trips": 1,
+      "validityMinutes": 90,
+      "transferable": true,
+      "notes": "Mesaj transfer între linii"
+    },
+    {
+      "id": "stb-abonament-luna",
+      "operator": "stb",
+      "category": "pass",
+      "name": "Abonament 1 lună",
+      "price": 80,
+      "durationDays": 30
+    },
+    {
+      "id": "integrated-abonament-an",
+      "operator": "integrated",
+      "category": "pass",
+      "name": "Abonament metropolitan + metrou 12 luni",
+      "price": 1410,
+      "durationDays": 365
+    }
+  ],
+  "discounts": [
+    {
+      "id": "donatori-sange",
+      "name": "Donatori de sânge",
+      "percentage": 50,
+      "appliesTo": ["stb-abonament-luna"],
+      "excludedFrom": ["integrated"],
+      "documentation": "Adeverință de la centrul de transfuzie"
+    },
+    {
+      "id": "studenti",
+      "name": "Studenți (instituție în București)",
+      "percentage": 90,
+      "appliesTo": ["metrorex-abonament-luna", "metrorex-10-calatorii"],
+      "excludedFrom": ["integrated"],
+      "constraints": "Maxim 3 titluri '10 călătorii' per 30 zile"
+    },
+    {
+      "id": "elevi",
+      "name": "Elevi învățământ preuniversitar",
+      "percentage": 100,
+      "appliesTo": ["metrorex-abonament-luna"],
+      "excludedFrom": ["integrated"]
+    }
+  ]
+}
