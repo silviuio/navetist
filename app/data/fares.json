@@ -3,8 +3,8 @@
     "lastUpdated": "2026-04-23",
     "currency": "RON",
     "sources": {
-      "stb": "https://stbsa.ro/tarife",
-      "metrorex": "https://metrorex.ro/tarife"
+      "stb": "https://www.stb.ro/tarife",
+      "metrorex": "https://www.metrorex.ro/titluri-de-calatorie-tarife"
     }
   },
   "operators": {
