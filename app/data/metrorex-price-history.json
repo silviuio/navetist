@@ -1,0 +1,13 @@
+{
+  "fareLabel": "1 călătorie metrou",
+  "note": "Prețul per călătorie este dedus din împărțirea prețului cartelei disponibile la momentul respectiv (2 sau 10 călătorii). Datele dinainte de 2010 sunt estimative.",
+  "entries": [
+    { "date": "2000-01-01", "price": 1.00, "label": "~2000", "note": "Estimat din cartele (≈10.000 lei vechi)" },
+    { "date": "2008-01-01", "price": 1.50, "label": "2008", "note": "Creșteri progresive în anii 2000" },
+    { "date": "2010-02-01", "price": 2.00, "label": "feb 2010", "note": "Confirmat din tarife Metrorex" },
+    { "date": "2013-02-01", "price": 2.50, "label": "feb 2013", "note": "Creștere standardizată" },
+    { "date": "2021-08-01", "price": 3.00, "label": "aug 2021", "note": "Prima majorare după ~8 ani" },
+    { "date": "2025-01-01", "price": 5.00, "label": "ian 2025", "note": "Creștere majoră" },
+    { "date": "2026-05-01", "price": 7.00, "label": "mai 2026", "note": "Majorare anunțată", "upcoming": true }
+  ]
+}
