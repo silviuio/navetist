@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import MetrorexIstoricChart from "../../components/MetrorexIstoricChart";
+import PriceChart from "../../components/metrorex-istoric/PriceChart";
+import PriceHistoryTable from "../../components/metrorex-istoric/PriceHistoryTable";
 
 export const metadata: Metadata = {
   title: "Evoluția prețului biletului de metrou București 2000–2026 | Navetist",
@@ -25,7 +26,14 @@ export default function MetrorexIstoricPage() {
         </p>
       </div>
 
-      <MetrorexIstoricChart />
+      <PriceChart />
+      <PriceHistoryTable />
+
+      <p className="text-xs text-zinc-600">
+        * Datele dinainte de 2010 sunt estimative — prețul per călătorie este
+        dedus din împărțirea prețului cartelei disponibile la momentul respectiv
+        (2 sau 10 călătorii).
+      </p>
     </div>
   );
 }
