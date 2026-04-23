@@ -208,7 +208,15 @@ export default function IntegratedBreakevenDialog({
           <div className="border-t border-zinc-800 pt-3 space-y-2 text-sm">
             <p className="text-xs text-zinc-500">
               Bilete folosite în calcul: STB {formatRon(effectiveStbTripPrice)}{" "}
-              · Metrorex {formatRon(effectiveMetroTripPrice)}
+              <span
+                className={
+                  useFuturePrices && metroTripPendingPrice !== undefined
+                    ? "text-orange-400"
+                    : undefined
+                }
+              >
+                · Metrorex {formatRon(effectiveMetroTripPrice)}
+              </span>
             </p>
             <div className="flex justify-between">
               <span className="text-zinc-400">Fără abonament (bilete)</span>
