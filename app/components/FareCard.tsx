@@ -1,6 +1,8 @@
 import { IdCard, Clock, ArrowLeftRight, Timer } from "lucide-react";
-import { pricePerTrip } from "../lib/fares";
+import { pricePerTrip, getSingleTripFare } from "../lib/fares";
 import type { Fare, Operator } from "../types/fares";
+import BreakevenDialog from "./BreakevenDialog";
+import IntegratedBreakevenDialog from "./IntegratedBreakevenDialog";
 
 const unitRo = (value: number, unit: string): string => {
   const singular: Record<string, string> = {
@@ -34,11 +36,16 @@ type Props = {
 };
 
 const FareCard = ({ fare, pendingChange }: Props) => {
+  const showBreakeven =
+    (fare.operator === "stb" || fare.operator === "metrorex") &&
+    (fare.category === "subscription" || fare.category === "time-pass");
+  const singleTripFare = showBreakeven ? getSingleTripFare(fare.operator) : undefined;
+
   return (
     <div
       className={`${operatorBg[fare.operator]} text-white rounded-lg flex h-full ${pendingChange ? "ring-1 ring-orange-500/60" : ""}`}
     >
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 flex flex-col">
         <h3 className="font-semibold text-base leading-snug mb-2">
           {fare.name}
         </h3>
@@ -92,6 +99,12 @@ const FareCard = ({ fare, pendingChange }: Props) => {
             </>
           )}
         </div>
+
+        {showBreakeven && singleTripFare && (
+          <div className="mt-auto pt-3">
+            <BreakevenDialog fare={fare} singleTripFare={singleTripFare} />
+          </div>
+        )}
       </div>
 
       <div className="border-l border-white/10 flex flex-col items-center justify-center px-4 w-24 shrink-0 gap-1">

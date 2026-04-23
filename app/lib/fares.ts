@@ -119,6 +119,13 @@ export function pricePerTrip(fare: TripFare): number {
   return fare.price / fare.trips;
 }
 
+// Prețul unei singure călătorii pentru un operator (biletul 1-călătorie)
+export function getSingleTripFare(operator: Operator): TripFare | undefined {
+  return data.fares.find(
+    (f): f is TripFare => f.operator === operator && f.category === "trip" && f.trips === 1
+  );
+}
+
 // De la câte călătorii pe lună merită abonamentul față de biletul individual
 export function breakevenTrips(tripFare: TripFare, subscriptionFare: SubscriptionFare): number {
   return Math.ceil(subscriptionFare.price / pricePerTrip(tripFare));
