@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TrendingUp } from "lucide-react";
 import FareGroup from "../components/FareGroup";
 import { getFaresByOperator } from "../lib/fares";
 import upcomingChanges from "../data/upcoming-changes.json";
@@ -31,11 +32,10 @@ export default function MetrorexPage() {
           </h1>
           <Link
             href="/metrorex/istoric"
-            className="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
           >
-            <span>📈</span>
-            <span>Vezi istoric preturi</span>
-            <span>→</span>
+            <TrendingUp size={14} />
+            <span>Vezi istoric prețuri</span>
           </Link>
         </div>
         <p className="text-gray-500 dark:text-gray-400 max-w-xl text-sm">

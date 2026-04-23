@@ -46,7 +46,7 @@ const FareCard = ({ fare, pendingChange }: Props) => {
         <div className="text-sm text-gray-300 space-y-1">
           {fare.category === "trip" && (
             <>
-              <p>{pricePerTrip(fare).toFixed(2)} RON / călătorie</p>
+              <p>{+pricePerTrip(fare).toFixed(2)} RON / călătorie</p>
               {fare.validityMinutes && (
                 <p className="flex items-center gap-1">
                   <Clock size={13} className="shrink-0" />
