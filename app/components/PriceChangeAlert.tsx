@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { TrendingUp } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -58,6 +60,16 @@ export default function PriceChangeAlert() {
             Elevii și studenții beneficiază în continuare de gratuitate și
             reducere 90%.
           </p>
+
+          <Link
+            href="/metrorex/istoric"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2 mt-2 pt-3 border-t border-zinc-800 text-sm text-sky-400 hover:text-sky-300 transition-colors"
+          >
+            <TrendingUp size={14} className="shrink-0" />
+            <span>Vezi evoluția prețurilor din 2000 până azi</span>
+            <span className="ml-auto">→</span>
+          </Link>
         </DialogContent>
       </Dialog>
     </>
