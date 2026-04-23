@@ -1,8 +1,7 @@
 import { IdCard, Clock, ArrowLeftRight, Timer } from "lucide-react";
 import { pricePerTrip, getSingleTripFare } from "../lib/fares";
 import type { Fare, Operator } from "../types/fares";
-import BreakevenDialog from "./BreakevenDialog";
-import IntegratedBreakevenDialog from "./IntegratedBreakevenDialog";
+import BreakevenCalculator from "./BreakevenCalculator";
 
 const unitRo = (value: number, unit: string): string => {
   const singular: Record<string, string> = {
@@ -36,17 +35,15 @@ type Props = {
 };
 
 const FareCard = ({ fare, pendingChange }: Props) => {
-  const showBreakeven =
-    (fare.operator === "stb" || fare.operator === "metrorex") &&
-    (fare.category === "subscription" || fare.category === "time-pass");
-  const singleTripFare = showBreakeven ? getSingleTripFare(fare.operator) : undefined;
-  const showIntegratedBreakeven =
-    fare.operator === "integrated" &&
-    (fare.category === "subscription" || fare.category === "time-pass");
-  const stbSingleTripFare = showIntegratedBreakeven
-    ? getSingleTripFare("stb")
-    : undefined;
-  const metroSingleTripFare = showIntegratedBreakeven
+  const isSubscription =
+    fare.category === "subscription" || fare.category === "time-pass";
+  const singleOperatorTripFare =
+    isSubscription && (fare.operator === "stb" || fare.operator === "metrorex")
+      ? getSingleTripFare(fare.operator)
+      : undefined;
+  const isIntegratedSub = isSubscription && fare.operator === "integrated";
+  const stbSingleTripFare = isIntegratedSub ? getSingleTripFare("stb") : undefined;
+  const metroSingleTripFare = isIntegratedSub
     ? getSingleTripFare("metrorex")
     : undefined;
 
@@ -103,18 +100,18 @@ const FareCard = ({ fare, pendingChange }: Props) => {
           )}
         </div>
 
-        {showBreakeven && singleTripFare && (
+        {singleOperatorTripFare && (
           <div className="mt-auto pt-3">
-            <BreakevenDialog fare={fare} singleTripFare={singleTripFare} />
+            <BreakevenCalculator fare={fare} tripFare={singleOperatorTripFare} />
           </div>
         )}
 
-        {showIntegratedBreakeven && stbSingleTripFare && metroSingleTripFare && (
+        {isIntegratedSub && stbSingleTripFare && metroSingleTripFare && (
           <div className="mt-auto pt-3">
-            <IntegratedBreakevenDialog
+            <BreakevenCalculator
               fare={fare}
-              stbSingleTripFare={stbSingleTripFare}
-              metroSingleTripFare={metroSingleTripFare}
+              stbTripFare={stbSingleTripFare}
+              metroTripFare={metroSingleTripFare}
             />
           </div>
         )}
