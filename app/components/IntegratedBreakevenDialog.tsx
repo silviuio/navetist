@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { Fare, TripFare } from "../types/fares";
+import upcomingChanges from "../data/upcoming-changes.json";
 
 type Props = {
   fare: Fare;
@@ -17,7 +18,8 @@ type Props = {
 };
 
 function durationInMonths(fare: Fare): number | null {
-  if (fare.category !== "subscription" && fare.category !== "time-pass") return null;
+  if (fare.category !== "subscription" && fare.category !== "time-pass")
+    return null;
   const { value, unit } = fare.duration;
   switch (unit) {
     case "months":
@@ -32,7 +34,8 @@ function durationInMonths(fare: Fare): number | null {
 }
 
 function periodLabel(fare: Fare): string {
-  if (fare.category !== "subscription" && fare.category !== "time-pass") return "lună";
+  if (fare.category !== "subscription" && fare.category !== "time-pass")
+    return "lună";
   const { value, unit } = fare.duration;
   if (unit === "months") return "lună";
   if (unit === "days") return value === 7 ? "săptămână" : `${value} zile`;
@@ -44,6 +47,10 @@ function formatRon(value: number): string {
   return `${value.toLocaleString("ro-RO", {
     maximumFractionDigits: value % 1 === 0 ? 0 : 2,
   })} RON`;
+}
+
+function getPendingPrice(fareId: string): number | undefined {
+  return upcomingChanges.changes.find((c) => c.fareId === fareId)?.newPrice;
 }
 
 type CounterProps = {
@@ -88,19 +95,44 @@ export default function IntegratedBreakevenDialog({
   const [open, setOpen] = useState(false);
   const [stbTrips, setStbTrips] = useState(15);
   const [metroTrips, setMetroTrips] = useState(10);
+  const [useFuturePrices, setUseFuturePrices] = useState(false);
 
-  if (fare.category !== "subscription" && fare.category !== "time-pass") return null;
+  if (fare.category !== "subscription" && fare.category !== "time-pass")
+    return null;
 
   const months = durationInMonths(fare);
   if (!months) return null;
 
+  const farePendingPrice = getPendingPrice(fare.id);
+  const stbTripPendingPrice = getPendingPrice(stbSingleTripFare.id);
+  const metroTripPendingPrice = getPendingPrice(metroSingleTripFare.id);
+  const hasPendingChanges =
+    farePendingPrice !== undefined ||
+    stbTripPendingPrice !== undefined ||
+    metroTripPendingPrice !== undefined;
+
+  const effectiveFarePrice =
+    useFuturePrices && farePendingPrice !== undefined
+      ? farePendingPrice
+      : fare.price;
+  const effectiveStbTripPrice =
+    useFuturePrices && stbTripPendingPrice !== undefined
+      ? stbTripPendingPrice
+      : stbSingleTripFare.price;
+  const effectiveMetroTripPrice =
+    useFuturePrices && metroTripPendingPrice !== undefined
+      ? metroTripPendingPrice
+      : metroSingleTripFare.price;
+
   const period = periodLabel(fare);
   const isMultiMonth = months > 1;
   const displayUnit = isMultiMonth ? "lună" : period;
-  const basePrice = isMultiMonth ? fare.price / months : fare.price;
+  const basePrice = isMultiMonth
+    ? effectiveFarePrice / months
+    : effectiveFarePrice;
 
   const currentCost =
-    stbTrips * stbSingleTripFare.price + metroTrips * metroSingleTripFare.price;
+    stbTrips * effectiveStbTripPrice + metroTrips * effectiveMetroTripPrice;
   const savings = currentCost - basePrice;
   const worthIt = savings >= 0;
   const remaining = Math.max(0, basePrice - currentCost);
@@ -130,24 +162,53 @@ export default function IntegratedBreakevenDialog({
               <DialogTitle className="text-white text-lg">
                 {fare.name}
               </DialogTitle>
-              <span className="text-lg font-bold text-white tabular-nums whitespace-nowrap">
+              {/* <span className="text-lg font-bold text-white tabular-nums whitespace-nowrap">
                 {formatRon(basePrice)}
-              </span>
+              </span> */}
             </div>
             <p className="text-sm text-zinc-400 mt-1">
               Pentru integrat, rezultatul depinde de mixul STB/Metrorex.
             </p>
           </DialogHeader>
 
+          {hasPendingChanges && (
+            <div className="flex items-center justify-between bg-zinc-800/60 border border-zinc-700/60 rounded-lg p-2.5 text-xs">
+              <span className="text-zinc-300">
+                Calculează cu prețurile de la 1 mai 2026
+              </span>
+              <button
+                onClick={() => setUseFuturePrices(!useFuturePrices)}
+                className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors ${
+                  useFuturePrices ? "bg-orange-500" : "bg-zinc-600"
+                }`}
+                aria-label="Toggle prețuri viitoare"
+              >
+                <span
+                  className={`inline-block h-4 w-4 rounded-full bg-white shadow transition-transform ${
+                    useFuturePrices ? "translate-x-4" : "translate-x-0.5"
+                  } self-center`}
+                />
+              </button>
+            </div>
+          )}
+
           <div className="space-y-2">
             <p className="text-xs text-zinc-500 uppercase tracking-wide">
               Câte călătorii faci pe {displayUnit}?
             </p>
             <Counter label="STB" value={stbTrips} onChange={setStbTrips} />
-            <Counter label="Metrorex" value={metroTrips} onChange={setMetroTrips} />
+            <Counter
+              label="Metrorex"
+              value={metroTrips}
+              onChange={setMetroTrips}
+            />
           </div>
 
           <div className="border-t border-zinc-800 pt-3 space-y-2 text-sm">
+            <p className="text-xs text-zinc-500">
+              Bilete folosite în calcul: STB {formatRon(effectiveStbTripPrice)}{" "}
+              · Metrorex {formatRon(effectiveMetroTripPrice)}
+            </p>
             <div className="flex justify-between">
               <span className="text-zinc-400">Fără abonament (bilete)</span>
               <span className="text-zinc-200 font-medium tabular-nums">
@@ -179,13 +240,17 @@ export default function IntegratedBreakevenDialog({
                     {resultLabel}
                   </p>
                   <p className="text-emerald-200/70 text-xs mt-0.5">
-                    Abonamentul integrat e mai avantajos la acest nivel de utilizare.
+                    Abonamentul integrat e mai avantajos la acest nivel de
+                    utilizare.
                   </p>
                 </div>
               </>
             ) : (
               <>
-                <TriangleAlert size={18} className="text-amber-400 shrink-0 mt-0.5" />
+                <TriangleAlert
+                  size={18}
+                  className="text-amber-400 shrink-0 mt-0.5"
+                />
                 <div className="text-sm">
                   <p className="text-amber-200 font-semibold">
                     Mai ai {formatRon(remaining)} până să merite
@@ -200,7 +265,8 @@ export default function IntegratedBreakevenDialog({
 
           {isMultiMonth && (
             <p className="text-xs text-zinc-500">
-              Calculat asumând utilizare constantă pe toată perioada ({months} luni).
+              Calculat asumând utilizare constantă pe toată perioada ({months}{" "}
+              luni).
             </p>
           )}
         </DialogContent>
