@@ -14,8 +14,13 @@ import priceHistory from "../data/metrorex-price-history.json";
 
 const data = priceHistory.entries.map((e) => ({
   ...e,
+  timestamp: new Date(e.date).getTime(),
   priceFmt: `${e.price.toFixed(2)} RON`,
 }));
+
+function formatYear(timestamp: number): string {
+  return new Date(timestamp).getFullYear().toString();
+}
 
 function CustomTooltip({
   active,
@@ -64,10 +69,15 @@ export default function MetrorexIstoricChart() {
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
             <XAxis
-              dataKey="label"
+              dataKey="timestamp"
+              type="number"
+              scale="time"
+              domain={["dataMin", "dataMax"]}
+              tickFormatter={formatYear}
               tick={{ fill: "#71717a", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
+              tickCount={6}
             />
             <YAxis
               tick={{ fill: "#71717a", fontSize: 12 }}
@@ -80,7 +90,7 @@ export default function MetrorexIstoricChart() {
             <Tooltip content={<CustomTooltip />} />
             {upcomingEntry && (
               <ReferenceLine
-                x={upcomingEntry.label}
+                x={upcomingEntry.timestamp}
                 stroke="#f97316"
                 strokeDasharray="4 4"
                 strokeOpacity={0.5}
