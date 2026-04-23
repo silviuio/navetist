@@ -17,7 +17,7 @@ export default function StbPage() {
 
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-12">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
           Tarife STB
         </h1>

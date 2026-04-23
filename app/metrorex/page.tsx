@@ -25,7 +25,7 @@ export default function MetrorexPage() {
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-12">
         <div className="flex justify-between items-start">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
             Tarife Metrorex
