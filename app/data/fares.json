@@ -1,69 +1,432 @@
 {
   "meta": {
-    "lastUpdated": "2026-04-22",
+    "lastUpdated": "2026-04-23",
     "currency": "RON",
     "sources": {
-      "stb": "https://stbsa.ro/...",
-      "metrorex": "https://metrorex.ro/..."
+      "stb": "https://stbsa.ro/tarife",
+      "metrorex": "https://metrorex.ro/tarife"
     }
   },
   "operators": {
     "stb": { "name": "STB", "fullName": "Societatea de Transport București" },
     "metrorex": { "name": "Metrorex", "fullName": "Metrorex S.A." },
-    "integrated": { "name": "Metropolitan", "fullName": "STB + Metrorex integrat" }
+    "integrated": { "name": "Metropolitan", "fullName": "STB + Metrorex" }
   },
   "fares": [
     {
-      "id": "stb-trip-single",
+      "id": "stb-trip-1",
       "operator": "stb",
+      "scope": "surface",
       "category": "trip",
       "name": "1 călătorie",
       "price": 3,
       "trips": 1,
       "validityMinutes": 90,
-      "transferable": true,
-      "notes": "Mesaj transfer între linii"
+      "transferable": true
     },
     {
-      "id": "stb-abonament-luna",
+      "id": "stb-trip-2",
       "operator": "stb",
-      "category": "pass",
+      "scope": "surface",
+      "category": "trip",
+      "name": "2 călătorii",
+      "price": 6,
+      "trips": 2,
+      "validityMinutes": 90,
+      "transferable": true
+    },
+    {
+      "id": "stb-trip-10",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "trip",
+      "name": "10 călătorii",
+      "price": 25,
+      "trips": 10,
+      "validityMinutes": 90,
+      "transferable": true
+    },
+    {
+      "id": "stb-pass-24h",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "time-pass",
+      "name": "Abonament 24 ore",
+      "price": 8,
+      "duration": { "value": 24, "unit": "hours" },
+      "activationRequired": true
+    },
+    {
+      "id": "stb-pass-72h",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "time-pass",
+      "name": "Abonament 72 ore",
+      "price": 20,
+      "duration": { "value": 72, "unit": "hours" },
+      "activationRequired": true
+    },
+    {
+      "id": "stb-pass-7d",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "time-pass",
+      "name": "Abonament 7 zile",
+      "price": 30,
+      "duration": { "value": 7, "unit": "days" },
+      "activationRequired": true
+    },
+    {
+      "id": "stb-sub-1m",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "subscription",
       "name": "Abonament 1 lună",
       "price": 80,
-      "durationDays": 30
+      "duration": { "value": 1, "unit": "months" },
+      "nominalRequired": true
     },
     {
-      "id": "integrated-abonament-an",
+      "id": "stb-sub-6m",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "subscription",
+      "name": "Abonament 6 luni",
+      "price": 400,
+      "duration": { "value": 6, "unit": "months" },
+      "nominalRequired": true
+    },
+    {
+      "id": "stb-sub-12m",
+      "operator": "stb",
+      "scope": "surface",
+      "category": "subscription",
+      "name": "Abonament 12 luni",
+      "price": 700,
+      "duration": { "value": 12, "unit": "months" },
+      "nominalRequired": true
+    },
+    {
+      "id": "metrorex-trip-1",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "trip",
+      "name": "1 călătorie",
+      "price": 5,
+      "trips": 1,
+      "transferable": false
+    },
+    {
+      "id": "metrorex-trip-2",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "trip",
+      "name": "2 călătorii",
+      "price": 10,
+      "trips": 2,
+      "transferable": false
+    },
+    {
+      "id": "metrorex-trip-10",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "trip",
+      "name": "10 călătorii",
+      "price": 40,
+      "trips": 10,
+      "transferable": false
+    },
+    {
+      "id": "metrorex-pass-24h",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "time-pass",
+      "name": "Abonament 24 ore",
+      "price": 12,
+      "duration": { "value": 24, "unit": "hours" },
+      "activationRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "metrorex-pass-72h",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "time-pass",
+      "name": "Abonament 72 ore",
+      "price": 35,
+      "duration": { "value": 72, "unit": "hours" },
+      "activationRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "metrorex-pass-7d",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "time-pass",
+      "name": "Abonament săptămânal",
+      "price": 45,
+      "duration": { "value": 7, "unit": "days" },
+      "activationRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "metrorex-sub-1m",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "subscription",
+      "name": "Abonament lunar",
+      "price": 100,
+      "duration": { "value": 1, "unit": "months" },
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "metrorex-sub-6m",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "subscription",
+      "name": "Abonament 6 luni",
+      "price": 500,
+      "duration": { "value": 6, "unit": "months" },
+      "nominalRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "metrorex-sub-12m",
+      "operator": "metrorex",
+      "scope": "metro",
+      "category": "subscription",
+      "name": "Abonament anual",
+      "price": 900,
+      "duration": { "value": 12, "unit": "months" },
+      "nominalRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "integrated-trip-1",
       "operator": "integrated",
-      "category": "pass",
-      "name": "Abonament metropolitan + metrou 12 luni",
+      "scope": "integrated",
+      "category": "trip",
+      "name": "1 călătorie metropolitană și metrou",
+      "price": 7,
+      "trips": 1,
+      "validityMinutes": 120,
+      "transferable": true
+    },
+    {
+      "id": "integrated-trip-2",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "trip",
+      "name": "2 călătorii metropolitane și metrou",
+      "price": 14,
+      "trips": 2,
+      "validityMinutes": 120,
+      "transferable": true
+    },
+    {
+      "id": "integrated-trip-10",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "trip",
+      "name": "10 călătorii metropolitane și metrou",
+      "price": 59,
+      "trips": 10,
+      "validityMinutes": 120,
+      "transferable": true
+    },
+    {
+      "id": "integrated-pass-24h",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "time-pass",
+      "name": "Abonament metropolitan și metrou 24 ore",
+      "price": 18,
+      "duration": { "value": 24, "unit": "hours" },
+      "activationRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "integrated-pass-72h",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "time-pass",
+      "name": "Abonament metropolitan și metrou 72 ore",
+      "price": 49,
+      "duration": { "value": 72, "unit": "hours" },
+      "activationRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "integrated-pass-7d",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "time-pass",
+      "name": "Abonament metropolitan și metrou 7 zile",
+      "price": 66,
+      "duration": { "value": 7, "unit": "days" },
+      "nominalRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "integrated-sub-1m",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "subscription",
+      "name": "Abonament metropolitan și metrou 1 lună",
+      "price": 160,
+      "duration": { "value": 1, "unit": "months" },
+      "nominalRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "integrated-sub-6m",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "subscription",
+      "name": "Abonament metropolitan și metrou 6 luni",
+      "price": 800,
+      "duration": { "value": 6, "unit": "months" },
+      "nominalRequired": true,
+      "activationWindowMinutes": 15
+    },
+    {
+      "id": "integrated-sub-12m",
+      "operator": "integrated",
+      "scope": "integrated",
+      "category": "subscription",
+      "name": "Abonament metropolitan și metrou 12 luni",
       "price": 1410,
-      "durationDays": 365
+      "duration": { "value": 12, "unit": "months" },
+      "nominalRequired": true,
+      "activationWindowMinutes": 15
     }
   ],
   "discounts": [
     {
-      "id": "donatori-sange",
+      "id": "donatori-stb",
       "name": "Donatori de sânge",
+      "operator": "stb",
       "percentage": 50,
-      "appliesTo": ["stb-abonament-luna"],
-      "excludedFrom": ["integrated"],
+      "appliesTo": ["stb-sub-1m"],
+      "discountedPrice": 40,
       "documentation": "Adeverință de la centrul de transfuzie"
     },
     {
-      "id": "studenti",
-      "name": "Studenți (instituție în București)",
-      "percentage": 90,
-      "appliesTo": ["metrorex-abonament-luna", "metrorex-10-calatorii"],
-      "excludedFrom": ["integrated"],
-      "constraints": "Maxim 3 titluri '10 călătorii' per 30 zile"
+      "id": "donatori-metrorex",
+      "name": "Donatori de sânge",
+      "operator": "metrorex",
+      "percentage": 50,
+      "appliesTo": ["metrorex-sub-1m"],
+      "discountedPrice": 50,
+      "documentation": "Adeverință de la centrul de transfuzie"
     },
     {
-      "id": "elevi",
-      "name": "Elevi învățământ preuniversitar",
+      "id": "studenti-metrorex-sub-90",
+      "name": "Studenți – reducere 90% abonament lunar",
+      "operator": "metrorex",
+      "percentage": 90,
+      "appliesTo": ["metrorex-sub-1m"],
+      "discountedPrice": 10,
+      "eligibility": "Studenți cu instituție de învățământ în București"
+    },
+    {
+      "id": "studenti-metrorex-trip10-90",
+      "name": "Studenți – reducere 90% la 10 călătorii",
+      "operator": "metrorex",
+      "percentage": 90,
+      "appliesTo": ["metrorex-trip-10"],
+      "discountedPrice": 4,
+      "constraints": "Maxim 3 titluri per 30 zile",
+      "eligibility": "Studenți cu instituție de învățământ în București"
+    },
+    {
+      "id": "studenti-metrorex-sub-gratuit",
+      "name": "Studenți – abonament lunar gratuit",
+      "operator": "metrorex",
       "percentage": 100,
-      "appliesTo": ["metrorex-abonament-luna"],
-      "excludedFrom": ["integrated"]
+      "appliesTo": ["metrorex-sub-1m"],
+      "discountedPrice": 0,
+      "eligibility": "Studenți orfani sau proveniți din centre de plasament (art. 64 alin. (1) din Legea nr. 272/2004)"
+    },
+    {
+      "id": "studenti-metrorex-trip10-gratuit",
+      "name": "Studenți – 10 călătorii gratuit",
+      "operator": "metrorex",
+      "percentage": 100,
+      "appliesTo": ["metrorex-trip-10"],
+      "discountedPrice": 0,
+      "eligibility": "Studenți orfani sau proveniți din centre de plasament (art. 64 alin. (1) din Legea nr. 272/2004)"
+    },
+    {
+      "id": "elevi-metrorex",
+      "name": "Elevi – abonament lunar gratuit",
+      "operator": "metrorex",
+      "percentage": 100,
+      "appliesTo": ["metrorex-sub-1m"],
+      "discountedPrice": 0,
+      "eligibility": "Elevi din învățământul preuniversitar"
+    }
+  ],
+  "gratuities": [
+    {
+      "id": "copii-stb",
+      "name": "Copii",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "elevi-stb",
+      "name": "Elevi",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "pensionari-stb",
+      "name": "Pensionari cu domiciliul în București",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "insotitori-pensionari-stb",
+      "name": "Însoțitori ai pensionarilor",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "veterani-stb",
+      "name": "Veterani de război",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "revolutionari-stb",
+      "name": "Revoluționari și urmașii celor decedați în Revoluție",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "persecutati-stb",
+      "name": "Persoane persecutate etnic (dislocați/deportați)",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "detinuti-politici-stb",
+      "name": "Foști deținuți politici",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "handicap-stb",
+      "name": "Persoane cu handicap grav/accentuat și asistenți personali",
+      "operator": "stb",
+      "scope": "surface"
+    },
+    {
+      "id": "personal-pmb-stb",
+      "name": "Personal PMB și instituții de interes local",
+      "operator": "stb",
+      "scope": "surface"
     }
   ]
 }
