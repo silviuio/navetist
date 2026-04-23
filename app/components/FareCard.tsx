@@ -40,6 +40,15 @@ const FareCard = ({ fare, pendingChange }: Props) => {
     (fare.operator === "stb" || fare.operator === "metrorex") &&
     (fare.category === "subscription" || fare.category === "time-pass");
   const singleTripFare = showBreakeven ? getSingleTripFare(fare.operator) : undefined;
+  const showIntegratedBreakeven =
+    fare.operator === "integrated" &&
+    (fare.category === "subscription" || fare.category === "time-pass");
+  const stbSingleTripFare = showIntegratedBreakeven
+    ? getSingleTripFare("stb")
+    : undefined;
+  const metroSingleTripFare = showIntegratedBreakeven
+    ? getSingleTripFare("metrorex")
+    : undefined;
 
   return (
     <div
@@ -103,6 +112,16 @@ const FareCard = ({ fare, pendingChange }: Props) => {
         {showBreakeven && singleTripFare && (
           <div className="mt-auto pt-3">
             <BreakevenDialog fare={fare} singleTripFare={singleTripFare} />
+          </div>
+        )}
+
+        {showIntegratedBreakeven && stbSingleTripFare && metroSingleTripFare && (
+          <div className="mt-auto pt-3">
+            <IntegratedBreakevenDialog
+              fare={fare}
+              stbSingleTripFare={stbSingleTripFare}
+              metroSingleTripFare={metroSingleTripFare}
+            />
           </div>
         )}
       </div>

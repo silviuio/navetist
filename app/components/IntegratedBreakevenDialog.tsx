@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator, Minus, Plus, Check, X } from "lucide-react";
+import { Calculator, Check, Minus, Plus, TriangleAlert } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -40,6 +40,32 @@ function periodLabel(fare: Fare): string {
   return "perioadă";
 }
 
+function compactFareName(fare: Fare): string {
+  if (fare.category !== "subscription" && fare.category !== "time-pass") {
+    return fare.name;
+  }
+
+  if (fare.duration.unit === "months" && fare.duration.value === 1) {
+    return "Abonament lunar integrat";
+  }
+
+  if (fare.duration.unit === "days" && fare.duration.value === 7) {
+    return "Abonament integrat 7 zile";
+  }
+
+  if (fare.duration.unit === "hours") {
+    return `Abonament integrat ${fare.duration.value}h`;
+  }
+
+  return fare.name.replace("metropolitan și metrou", "integrat");
+}
+
+function formatRon(value: number): string {
+  return `${value.toLocaleString("ro-RO", {
+    maximumFractionDigits: value % 1 === 0 ? 0 : 2,
+  })} RON`;
+}
+
 type CounterProps = {
   label: string;
   value: number;
@@ -48,17 +74,18 @@ type CounterProps = {
 
 function Counter({ label, value, onChange }: CounterProps) {
   return (
-    <div className="flex items-center justify-between">
-      <span className="text-sm text-zinc-300">{label}</span>
-      <div className="flex items-center gap-1">
+    <div className="flex items-center justify-between gap-4 rounded-lg bg-zinc-950/40 border border-zinc-800/80 px-3 py-2">
+      <span className="text-sm font-medium text-zinc-200">{label}</span>
+      <div className="flex items-center gap-2">
         <button
           onClick={() => onChange(Math.max(0, value - 1))}
-          className="w-7 h-7 rounded-md bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-zinc-300 transition-colors"
+          className="w-7 h-7 rounded-md bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:hover:bg-zinc-800 flex items-center justify-center text-zinc-300 transition-colors"
+          disabled={value === 0}
           aria-label={`Scade ${label}`}
         >
           <Minus size={13} />
         </button>
-        <span className="w-10 text-center text-sm font-semibold text-white tabular-nums">
+        <span className="w-9 text-center text-base font-semibold text-white tabular-nums">
           {value}
         </span>
         <button
@@ -79,7 +106,7 @@ export default function IntegratedBreakevenDialog({
   metroSingleTripFare,
 }: Props) {
   const [open, setOpen] = useState(false);
-  const [stbTrips, setStbTrips] = useState(20);
+  const [stbTrips, setStbTrips] = useState(15);
   const [metroTrips, setMetroTrips] = useState(10);
 
   if (fare.category !== "subscription" && fare.category !== "time-pass") return null;
@@ -95,7 +122,12 @@ export default function IntegratedBreakevenDialog({
   const currentCost =
     stbTrips * stbSingleTripFare.price + metroTrips * metroSingleTripFare.price;
   const savings = currentCost - basePrice;
-  const worthIt = savings > 0;
+  const worthIt = savings >= 0;
+  const remaining = Math.max(0, basePrice - currentCost);
+  const resultLabel =
+    savings === 0
+      ? "Ești exact la pragul de rentabilitate"
+      : `Economisești ${formatRon(savings)}/${displayUnit}`;
 
   return (
     <>
@@ -114,22 +146,32 @@ export default function IntegratedBreakevenDialog({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-zinc-900 border-zinc-700 text-white max-w-sm">
           <DialogHeader>
-            <DialogTitle className="text-white text-lg">{fare.name}</DialogTitle>
+            <div className="flex items-start justify-between gap-4">
+              <DialogTitle className="text-white text-lg">
+                {compactFareName(fare)}
+              </DialogTitle>
+              <span className="text-lg font-bold text-white tabular-nums whitespace-nowrap">
+                {formatRon(basePrice)}
+              </span>
+            </div>
             <p className="text-sm text-zinc-400 mt-1">
-              Câte călătorii faci pe {displayUnit}?
+              Pentru integrat, rezultatul depinde de mixul STB/Metrorex.
             </p>
           </DialogHeader>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
+            <p className="text-xs text-zinc-500 uppercase tracking-wide">
+              Câte călătorii faci pe {displayUnit}?
+            </p>
             <Counter label="STB" value={stbTrips} onChange={setStbTrips} />
             <Counter label="Metrorex" value={metroTrips} onChange={setMetroTrips} />
           </div>
 
-          <div className="border-t border-zinc-800 pt-3 space-y-1.5 text-sm">
+          <div className="border-t border-zinc-800 pt-3 space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-zinc-400">Fără abonament (bilete)</span>
               <span className="text-zinc-200 font-medium tabular-nums">
-                {currentCost} RON
+                {formatRon(currentCost)}
               </span>
             </div>
             <div className="flex justify-between">
@@ -137,7 +179,7 @@ export default function IntegratedBreakevenDialog({
                 Cu abonament{isMultiMonth ? " (per lună)" : ""}
               </span>
               <span className="text-zinc-200 font-medium tabular-nums">
-                {basePrice.toFixed(2).replace(/\.00$/, "")} RON
+                {formatRon(basePrice)}
               </span>
             </div>
           </div>
@@ -146,7 +188,7 @@ export default function IntegratedBreakevenDialog({
             className={`border rounded-lg p-3 flex items-start gap-2 ${
               worthIt
                 ? "bg-emerald-500/10 border-emerald-500/30"
-                : "bg-zinc-800/60 border-zinc-700/60"
+                : "bg-amber-500/10 border-amber-500/30"
             }`}
           >
             {worthIt ? (
@@ -154,7 +196,7 @@ export default function IntegratedBreakevenDialog({
                 <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
                 <div className="text-sm">
                   <p className="text-emerald-300 font-semibold">
-                    Economisești {savings.toFixed(2).replace(/\.00$/, "")} RON/{displayUnit}
+                    {resultLabel}
                   </p>
                   <p className="text-emerald-200/70 text-xs mt-0.5">
                     Abonamentul integrat e mai avantajos la acest nivel de utilizare.
@@ -163,12 +205,12 @@ export default function IntegratedBreakevenDialog({
               </>
             ) : (
               <>
-                <X size={18} className="text-zinc-400 shrink-0 mt-0.5" />
+                <TriangleAlert size={18} className="text-amber-400 shrink-0 mt-0.5" />
                 <div className="text-sm">
-                  <p className="text-zinc-200 font-semibold">
-                    Mai ai {Math.abs(savings).toFixed(2).replace(/\.00$/, "")} RON până să merite
+                  <p className="text-amber-200 font-semibold">
+                    Mai ai {formatRon(remaining)} până să merite
                   </p>
-                  <p className="text-zinc-400 text-xs mt-0.5">
+                  <p className="text-amber-100/70 text-xs mt-0.5">
                     La acest nivel, biletele individuale sunt mai ieftine.
                   </p>
                 </div>
