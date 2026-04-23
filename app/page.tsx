@@ -18,9 +18,9 @@ const operators = [
     label: "Metrorex",
     fullName: "Metrorex S.A.",
     description:
-      "Rețeaua de metrou din București cu 4 magistrale și 53 de stații. Fiecare validare reprezintă o călătorie individuală fără transfer.",
-    color: "border-gray-500",
-    badge: "bg-gray-700 text-gray-100",
+      "Rețeaua de metrou din București cu 5 magistrale și 63 de stații. Fiecare validare reprezintă o călătorie individuală fără transfer.",
+    color: "border-sky-700",
+    badge: "bg-sky-950 text-blue-100",
   },
   {
     key: "integrated" as const,
@@ -56,10 +56,10 @@ export default function Home() {
             <Link
               key={op.key}
               href={op.href}
-              className={`group block bg-white dark:bg-zinc-900 rounded-xl border-t-4 ${op.color} shadow-sm hover:shadow-md transition-shadow p-5`}
+              className={`group flex flex-col bg-white dark:bg-zinc-900 rounded-xl border-t-4 ${op.color} shadow-sm hover:shadow-md transition-shadow p-5`}
             >
               <div className="flex items-start justify-between mb-3">
-                <span className={`text-xs font-semibold px-2 py-1 rounded ${op.badge}`}>
+                <span className={`text-sm font-semibold px-3 py-1.5 rounded ${op.badge}`}>
                   {op.label}
                 </span>
                 <span className="text-gray-400 group-hover:translate-x-1 transition-transform text-lg">
@@ -74,7 +74,7 @@ export default function Home() {
                 {op.description}
               </p>
 
-              <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-800 pt-3">
+              <div className="mt-auto flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-800 pt-3">
                 <span>{fares.length} tipuri de bilete</span>
                 <span>·</span>
                 <span>de la {minPrice} RON</span>
