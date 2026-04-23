@@ -49,10 +49,14 @@ function CustomTooltip({
   return (
     <div className="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm shadow-lg">
       <p className="font-semibold text-white mb-0.5">{d.label}</p>
-      <p className={`font-bold text-lg ${d.upcoming ? "text-orange-400" : "text-sky-400"}`}>
+      <p
+        className={`font-bold text-lg ${d.upcoming ? "text-orange-400" : "text-sky-400"}`}
+      >
         {d.priceFmt}
       </p>
-      {d.note && <p className="text-zinc-400 text-xs mt-1 max-w-[180px]">{d.note}</p>}
+      {d.note && (
+        <p className="text-zinc-400 text-xs mt-1 max-w-[180px]">{d.note}</p>
+      )}
     </div>
   );
 }
@@ -75,14 +79,21 @@ export default function MetrorexIstoricChart() {
         </div>
 
         <ResponsiveContainer width="100%" height={320}>
-          <AreaChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+          <AreaChart
+            data={data}
+            margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
+          >
             <defs>
               <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.2} />
                 <stop offset="95%" stopColor="#38bdf8" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="#27272a"
+              vertical={false}
+            />
             <XAxis
               dataKey="timestamp"
               type="number"
@@ -142,10 +153,18 @@ export default function MetrorexIstoricChart() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-zinc-800">
-              <th className="text-left px-4 py-3 text-zinc-400 font-medium">Perioadă</th>
-              <th className="text-left px-4 py-3 text-zinc-400 font-medium">Preț / călătorie</th>
-              <th className="text-left px-4 py-3 text-zinc-400 font-medium">Majorare</th>
-              <th className="text-left px-4 py-3 text-zinc-400 font-medium hidden sm:table-cell">Observație</th>
+              <th className="text-left px-4 py-3 text-zinc-400 font-medium">
+                Perioadă
+              </th>
+              <th className="text-left px-4 py-3 text-zinc-400 font-medium">
+                Preț / călătorie
+              </th>
+              <th className="text-left px-4 py-3 text-zinc-400 font-medium">
+                Majorare
+              </th>
+              <th className="text-left px-4 py-3 text-zinc-400 font-medium hidden sm:table-cell">
+                Observație
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -154,11 +173,17 @@ export default function MetrorexIstoricChart() {
                 key={i}
                 className={`border-b border-zinc-800/60 last:border-0 ${entry.upcoming ? "bg-orange-500/5" : ""}`}
               >
-                <td className="px-4 py-3 text-zinc-300 font-medium">{entry.label}</td>
-                <td className={`px-4 py-3 font-bold ${entry.upcoming ? "text-orange-400" : "text-white"}`}>
+                <td className="px-4 py-3 text-zinc-300 font-medium">
+                  {entry.label}
+                </td>
+                <td
+                  className={`px-4 py-3 font-bold ${entry.upcoming ? "text-orange-400" : "text-white"}`}
+                >
                   {entry.priceFmt}
                   {entry.upcoming && (
-                    <span className="ml-2 text-xs font-normal text-orange-400/70">anunțat</span>
+                    <span className="ml-2 text-xs font-normal text-orange-400/70">
+                      anunțat
+                    </span>
                   )}
                 </td>
                 <td
@@ -168,7 +193,9 @@ export default function MetrorexIstoricChart() {
                 >
                   {entry.increaseFmt}
                 </td>
-                <td className="px-4 py-3 text-zinc-500 hidden sm:table-cell">{entry.note}</td>
+                <td className="px-4 py-3 text-zinc-500 hidden sm:table-cell">
+                  {entry.note}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -176,8 +203,9 @@ export default function MetrorexIstoricChart() {
       </div>
 
       <p className="text-xs text-zinc-600">
-        * Datele dinainte de 2010 sunt estimative — prețul per călătorie este dedus din
-        împărțirea prețului cartelei disponibile la momentul respectiv (2 sau 10 călătorii).
+        * Datele dinainte de 2010 sunt estimative — prețul per călătorie este
+        dedus din împărțirea prețului cartelei disponibile la momentul respectiv
+        (2 sau 10 călătorii).
       </p>
     </>
   );
