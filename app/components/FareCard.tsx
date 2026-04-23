@@ -34,7 +34,7 @@ const FareCard = ({ fare, pendingChange }: Props) => {
               <p>Valabilitate: {fare.duration.value} {fare.duration.unit}</p>
               <p>Necesită validare la prima utilizare</p>
               {fare.activationWindowMinutes && (
-                <p>Fereastră activare: {fare.activationWindowMinutes} min</p>
+                <p>Temporizare: {fare.activationWindowMinutes} min</p>
               )}
             </>
           )}

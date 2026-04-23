@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/stb`, lastModified, priority: 0.9 },
     { url: `${SITE_URL}/metrorex`, lastModified, priority: 0.9 },
     { url: `${SITE_URL}/integrat`, lastModified, priority: 0.9 },
+    { url: `${SITE_URL}/metrorex/istoric`, lastModified, priority: 0.7 },
     { url: `${SITE_URL}/surse`, lastModified, priority: 0.4 },
   ];
 }

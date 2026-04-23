@@ -25,25 +25,18 @@ export default function MetrorexPage() {
   return (
     <div>
       <div className="mb-6">
-        <span className="text-xs font-semibold bg-sky-950 text-sky-100 px-2 py-1 rounded">
-          Metrorex
-        </span>
-
-        <div className="flex justify-between">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-3 mb-1">
-            Metrorex S.A.
+        <div className="flex justify-between items-start">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            Tarife Metrorex
           </h1>
-
-          <div className="mb-8">
-            <Link
-              href="/metrorex/istoric"
-              className="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 transition-colors"
-            >
-              <span>📈</span>
-              <span>Vezi istoric preturi</span>
-              <span>→</span>
-            </Link>
-          </div>
+          <Link
+            href="/metrorex/istoric"
+            className="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 transition-colors"
+          >
+            <span>📈</span>
+            <span>Vezi istoric preturi</span>
+            <span>→</span>
+          </Link>
         </div>
         <p className="text-gray-500 dark:text-gray-400 max-w-xl text-sm">
           Rețeaua de metrou din București cu 5 magistrale și 63 de stații.

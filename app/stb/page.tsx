@@ -18,11 +18,8 @@ export default function StbPage() {
   return (
     <div>
       <div className="mb-8">
-        <span className="text-xs font-semibold bg-emerald-900 text-emerald-100 px-2 py-1 rounded">
-          STB
-        </span>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-3 mb-1">
-          Societatea de Transport București
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+          Tarife STB
         </h1>
         <p className="text-gray-500 dark:text-gray-400 max-w-xl text-sm">
           Transport de suprafață în Regiunea București-Ilfov. Călătoriile sunt valabile

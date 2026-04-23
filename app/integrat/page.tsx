@@ -18,12 +18,17 @@ export default function IntegratPage() {
   return (
     <div>
       <div className="mb-8">
-        <span className="text-xs font-semibold bg-slate-700 text-slate-100 px-2 py-1 rounded">
-          Integrat
-        </span>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-3 mb-1">
-          STB + Metrorex
-        </h1>
+        <div className="flex items-center gap-2 mb-2">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Tarife integrate
+          </h1>
+          <span className="text-xs font-semibold bg-emerald-900 text-emerald-100 px-2 py-1 rounded">
+            STB
+          </span>
+          <span className="text-xs font-semibold bg-sky-950 text-sky-100 px-2 py-1 rounded">
+            Metrorex
+          </span>
+        </div>
         <p className="text-gray-500 dark:text-gray-400 max-w-xl text-sm">
           Bilete și abonamente comune valabile atât pe rețeaua de suprafață STB, cât
           și la metrou. Călătoriile sunt valabile 120 de minute cu validări nelimitate.

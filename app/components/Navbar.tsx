@@ -18,7 +18,7 @@ export default function Navbar() {
     <nav className="bg-gray-900 text-white sticky top-0 z-50">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link href="/" className="font-bold text-lg tracking-tight">
-          Navetist
+          Navetist.ro
         </Link>
 
         <div className="hidden sm:flex gap-6">
