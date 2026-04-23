@@ -1,3 +1,4 @@
+import { Ticket, CalendarDays } from "lucide-react";
 import type { Fare } from "../types/fares";
 import FareCard from "./FareCard";
 
@@ -14,10 +15,12 @@ export default function FareGroup({ title, fares, pendingChanges }: Props) {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide text-sm">
+      <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide text-sm">
+        {title === "Călătorii" && <Ticket size={15} />}
+        {title === "Abonamente" && <CalendarDays size={15} />}
         {title}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-stretch">
         {fares.map((fare) => (
           <FareCard
             key={fare.id}
