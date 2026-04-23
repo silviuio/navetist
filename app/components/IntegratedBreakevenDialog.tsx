@@ -144,15 +144,16 @@ export default function IntegratedBreakevenDialog({
   return (
     <>
       <button
+        type="button"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           setOpen(true);
         }}
-        className="inline-flex items-center gap-1 text-xs text-white/60 hover:text-white transition-colors"
+        className="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:border-white/25 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
       >
-        <Calculator size={12} />
-        <span>De când merită?</span>
+        <Calculator size={13} />
+        <span>Când merită?</span>
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>

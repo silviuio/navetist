@@ -18,7 +18,8 @@ type Props = {
 
 // Normalizează durata abonamentului în luni
 function durationInMonths(fare: Fare): number | null {
-  if (fare.category !== "subscription" && fare.category !== "time-pass") return null;
+  if (fare.category !== "subscription" && fare.category !== "time-pass")
+    return null;
   const { value, unit } = fare.duration;
   switch (unit) {
     case "months":
@@ -33,7 +34,8 @@ function durationInMonths(fare: Fare): number | null {
 }
 
 function periodLabel(fare: Fare): string {
-  if (fare.category !== "subscription" && fare.category !== "time-pass") return "";
+  if (fare.category !== "subscription" && fare.category !== "time-pass")
+    return "";
   const { value, unit } = fare.duration;
   if (unit === "months") return "lună";
   if (unit === "days") return value === 7 ? "săptămână" : `${value} zile`;
@@ -49,7 +51,8 @@ export default function BreakevenDialog({ fare, singleTripFare }: Props) {
   const [open, setOpen] = useState(false);
   const [useFuturePrices, setUseFuturePrices] = useState(false);
 
-  if (fare.category !== "subscription" && fare.category !== "time-pass") return null;
+  if (fare.category !== "subscription" && fare.category !== "time-pass")
+    return null;
 
   const months = durationInMonths(fare);
   if (!months) return null;
@@ -57,11 +60,14 @@ export default function BreakevenDialog({ fare, singleTripFare }: Props) {
   // Prețuri viitoare (dacă există pentru acest fare sau pentru bilet)
   const farePendingPrice = getPendingPrice(fare.id);
   const tripPendingPrice = getPendingPrice(singleTripFare.id);
-  const hasPendingChanges = farePendingPrice !== undefined || tripPendingPrice !== undefined;
+  const hasPendingChanges =
+    farePendingPrice !== undefined || tripPendingPrice !== undefined;
 
   // Prețul efectiv pe care îl folosim în calcul
   const effectiveFarePrice =
-    useFuturePrices && farePendingPrice !== undefined ? farePendingPrice : fare.price;
+    useFuturePrices && farePendingPrice !== undefined
+      ? farePendingPrice
+      : fare.price;
   const effectiveSingleTripPrice =
     useFuturePrices && tripPendingPrice !== undefined
       ? tripPendingPrice
@@ -85,23 +91,27 @@ export default function BreakevenDialog({ fare, singleTripFare }: Props) {
   return (
     <>
       <button
+        type="button"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           setOpen(true);
         }}
-        className="inline-flex items-center gap-1 text-xs text-white/60 hover:text-white transition-colors"
+        className="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:border-white/25 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
       >
-        <Calculator size={12} />
-        <span>De când merită?</span>
+        <Calculator size={13} />
+        <span>Când merită?</span>
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-zinc-900 border-zinc-700 text-white max-w-sm">
           <DialogHeader>
-            <DialogTitle className="text-white text-lg">{fare.name}</DialogTitle>
+            <DialogTitle className="text-white text-lg">
+              {fare.name}
+            </DialogTitle>
             <p className="text-sm text-zinc-400 mt-1">
-              Comparație cu biletul de {effectiveSingleTripPrice} RON / călătorie
+              Comparație cu biletul de {effectiveSingleTripPrice} RON /
+              călătorie
             </p>
           </DialogHeader>
 
@@ -163,7 +173,9 @@ export default function BreakevenDialog({ fare, singleTripFare }: Props) {
                 const highlightBg = useFuturePrices
                   ? "bg-orange-500/10"
                   : "bg-emerald-500/10";
-                const cheaperText = useFuturePrices ? "text-orange-400" : "text-emerald-400";
+                const cheaperText = useFuturePrices
+                  ? "text-orange-400"
+                  : "text-emerald-400";
                 return (
                   <div
                     key={n}
@@ -189,7 +201,8 @@ export default function BreakevenDialog({ fare, singleTripFare }: Props) {
 
           {isMultiMonth && (
             <p className="text-xs text-zinc-500">
-              Calculat asumând utilizare constantă pe toată perioada ({months} luni).
+              Calculat asumând utilizare constantă pe toată perioada ({months}{" "}
+              luni).
             </p>
           )}
         </DialogContent>

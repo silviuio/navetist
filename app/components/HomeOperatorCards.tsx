@@ -10,7 +10,7 @@ const operators = [
     href: "/stb",
     title: "Tarife STB",
     description:
-      "Transport de suprafață — autobuze, tramvaie, troleibuze — în Regiunea București-Ilfov. Călătoriile sunt valabile 90 de minute cu transfer gratuit între linii.",
+      "Transport de suprafață — autobuze, tramvaie, troleibuze — în Regiunea București-Ilfov.",
     color: "border-emerald-600",
   },
   {
@@ -18,7 +18,7 @@ const operators = [
     href: "/metrorex",
     title: "Tarife Metrorex",
     description:
-      "Rețeaua de metrou din București cu 5 magistrale și 63 de stații. Fiecare validare reprezintă o călătorie individuală fără transfer.",
+      "Rețeaua de metrou din București cu 5 magistrale și 63 de stații.",
     color: "border-sky-700",
   },
   {
@@ -26,7 +26,7 @@ const operators = [
     href: "/integrat",
     title: "Tarife integrate",
     description:
-      "Bilete și abonamente comune pentru deplasări mixte pe suprafață și metrou. Valabile 120 de minute cu validări nelimitate.",
+      "Bilete și abonamente comune pentru deplasări mixte pe suprafață și metrou.",
     color: "border-slate-500",
   },
 ];
@@ -65,8 +65,8 @@ export default function HomeOperatorCards() {
               </div>
             )}
 
-            <div className="mt-auto flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-800 pt-3">
-              <span>{fares.length} tipuri de bilete</span>
+            <div className="mt-auto flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-800 pt-3">
+              <span>{fares.length} tarife</span>
               <span>·</span>
               <span>de la {minPrice} RON</span>
             </div>

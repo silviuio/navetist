@@ -59,19 +59,19 @@ const FareCard = ({ fare, pendingChange }: Props) => {
           {fare.name}
         </h3>
 
-        <div className="text-sm text-gray-300 space-y-1">
+        <div className="text-xs text-gray-300 space-y-1">
           {fare.category === "trip" && (
             <>
               <p>{+pricePerTrip(fare).toFixed(2)} RON / călătorie</p>
               {fare.validityMinutes && (
                 <p className="flex items-center gap-1">
-                  <Clock size={13} className="shrink-0" />
+                  <Clock size={12} className="shrink-0" />
                   {fare.validityMinutes} min
                 </p>
               )}
               {fare.transferable && (
                 <p className="flex items-center gap-1">
-                  <ArrowLeftRight size={13} className="shrink-0" />
+                  <ArrowLeftRight size={12} className="shrink-0" />
                   Transfer inclus
                 </p>
               )}
@@ -81,27 +81,21 @@ const FareCard = ({ fare, pendingChange }: Props) => {
           {fare.category === "time-pass" && (
             <>
               <p className="flex items-center gap-1">
-                <Timer size={13} className="shrink-0" />
+                <Timer size={12} className="shrink-0" />
                 Activare la prima validare
               </p>
-              {fare.activationWindowMinutes && (
-                <p className="flex items-center gap-1">
-                  <Clock size={13} className="shrink-0" />
-                  Temporizare: {fare.activationWindowMinutes} min
-                </p>
-              )}
             </>
           )}
 
           {fare.category === "subscription" && (
             <>
               <p className="flex items-center gap-1">
-                <Clock size={13} className="shrink-0" />
+                <Clock size={12} className="shrink-0" />
                 {fare.duration.value} {unitRo(fare.duration.value, fare.duration.unit)}
               </p>
               {fare.nominalRequired && (
                 <p className="flex items-center gap-1">
-                  <IdCard size={13} className="shrink-0" />
+                  <IdCard size={12} className="shrink-0" />
                   Nominal
                 </p>
               )}

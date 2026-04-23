@@ -26,6 +26,7 @@ export default function IntegratPage() {
           <span className="text-xs font-semibold bg-emerald-900 text-emerald-100 px-2 py-1 rounded">
             STB
           </span>
+          <span>+</span>
           <span className="text-xs font-semibold bg-sky-950 text-sky-100 px-2 py-1 rounded">
             Metrorex
           </span>
