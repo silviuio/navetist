@@ -22,8 +22,8 @@ export default function DesprePage() {
         <p>
           Am construit site-ul pentru ca, in 2026, informatia despre preturi
           este fragmentata pe site-uri oficiale diferite, prezentata in formate
-          greu de comparat, iar cand apar scumpiri nu e usor sa intelegi daca
-          un abonament mai merita pentru tine.
+          greu de comparat, iar cand apar scumpiri nu e usor sa intelegi daca un
+          abonament mai merita pentru tine.
         </p>
       </section>
 
@@ -36,8 +36,8 @@ export default function DesprePage() {
           pentru viitor.
         </li>
         <li>
-          Calculatoare de &quot;cand merita&quot; pentru fiecare abonament — iti arata
-          pragul de la care economisesti fata de biletele individuale.
+          Calculatoare de &quot;cand merita&quot; pentru fiecare abonament — iti
+          arata pragul de la care economisesti fata de biletele individuale.
         </li>
         <li>
           Istoricul preturilor la metrou din 2000 pana azi, cu toate majorarile.
@@ -68,9 +68,7 @@ export default function DesprePage() {
         .
       </p>
 
-      <h2 className="text-xl font-semibold text-white mt-10 mb-4">
-        Cine sunt
-      </h2>
+      <h2 className="text-xl font-semibold text-white mt-10 mb-4">Cine sunt</h2>
       <p className="text-gray-300 text-[15px] leading-relaxed">
         Ma numesc <strong>Silviu Iordache</strong> si folosesc zilnic
         transportul public din Bucuresti. Am facut Navetist pentru ca aveam
@@ -83,45 +81,39 @@ export default function DesprePage() {
       <ul className="space-y-2 text-gray-300 text-[15px] list-disc pl-5 marker:text-zinc-600">
         <li>
           Nu este un site oficial STB sau Metrorex si nu are legatura cu
-          acestia.
+          acestia. Pentru biletare, foloseste aplicatiile oficiale{" "}
+          <a
+            href="https://www.stb.ro/"
+            className="text-sky-400 hover:text-sky-300 transition-colors"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            STB
+          </a>{" "}
+          si{" "}
+          <a
+            href="https://metrorex.ro"
+            className="text-sky-400 hover:text-sky-300 transition-colors"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Metrorex
+          </a>
+          .
         </li>
         <li>Nu vinde bilete sau abonamente.</li>
         <li>
-          Nu vinde date si nu face profilare pentru reclame. Pentru a
-          intelege ce pagini sunt utile si ce se poate imbunatati, site-ul
-          foloseste doua tooluri de analytics:{" "}
-          <strong>Vercel Analytics</strong> (statistici agregate — page
-          views, tara, tip de device, fara cookies) si{" "}
-          <strong>Microsoft Clarity</strong> (heatmaps si inregistrari
-          anonime ale sesiunilor, cu text si campuri sensibile mascate
-          automat). Clarity foloseste cookies first-party pentru a lega
-          actiunile dintr-o sesiune. Daca nu esti de acord, poti bloca
-          aceste scripturi din extensii precum uBlock Origin sau din
-          setarile browserului.
+          Nu vinde date si nu face profilare pentru reclame. Pentru a intelege
+          ce pagini sunt utile si ce se poate imbunatati, site-ul foloseste doua
+          tooluri de analytics: <strong>Vercel Analytics</strong> (statistici
+          agregate — page views, tara, tip de device, fara cookies) si{" "}
+          <strong>Microsoft Clarity</strong> (heatmaps si inregistrari anonime
+          ale sesiunilor, cu text si campuri sensibile mascate automat). Clarity
+          foloseste cookies first-party pentru a lega actiunile dintr-o sesiune.
+          Daca nu esti de acord, poti bloca aceste scripturi din extensii precum
+          uBlock Origin sau din setarile browserului.
         </li>
       </ul>
-
-      <p className="text-xs text-zinc-500 mt-12 pt-6 border-t border-zinc-800">
-        Pentru biletare, foloseste aplicatiile oficiale{" "}
-        <a
-          href="https://www.stbsa.ro"
-          className="hover:text-zinc-300 transition-colors"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          STB
-        </a>{" "}
-        si{" "}
-        <a
-          href="https://metrorex.ro"
-          className="hover:text-zinc-300 transition-colors"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Metrorex
-        </a>
-        .
-      </p>
     </div>
   );
 }
