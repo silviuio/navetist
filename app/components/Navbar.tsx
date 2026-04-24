@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -17,7 +18,15 @@ export default function Navbar() {
   return (
     <nav className="bg-gray-900 text-white sticky top-0 z-50">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg tracking-tight">
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
+          <Image
+            src="/icon.svg"
+            alt=""
+            width={28}
+            height={28}
+            priority
+            className="size-7 rounded-full"
+          />
           Navetist.ro
         </Link>
 
