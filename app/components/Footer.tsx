@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { faresData } from "../lib/fares";
+import { FeedbackButton } from "./FeedbackButton";
 
 export default function Footer() {
   return (
@@ -14,6 +15,8 @@ export default function Footer() {
           <Link href="/despre" className="hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
             Despre
           </Link>
+          <span className="text-gray-300 dark:text-gray-700">·</span>
+          <FeedbackButton />
         </div>
       </div>
     </footer>
