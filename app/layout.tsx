@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { SITE_URL, SITE_NAME } from "./lib/config";
 import { Analytics } from "@vercel/analytics/next";
+import Clarity from "./components/Clarity";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,6 +51,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <Analytics />
+        <Clarity />
       </body>
     </html>
   );
