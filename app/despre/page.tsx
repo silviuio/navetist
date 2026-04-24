@@ -87,10 +87,17 @@ export default function DesprePage() {
         </li>
         <li>Nu vinde bilete sau abonamente.</li>
         <li>
-          Nu foloseste cookies. Pentru a intelege ce pagini sunt utile,
-          site-ul colecteaza prin servicii de analytics statistici agregate
-          (page views, tara, tip de device) — fara adrese IP, fara
-          identificatori unici, fara profilare.
+          Nu vinde date si nu face profilare pentru reclame. Pentru a
+          intelege ce pagini sunt utile si ce se poate imbunatati, site-ul
+          foloseste doua tooluri de analytics:{" "}
+          <strong>Vercel Analytics</strong> (statistici agregate — page
+          views, tara, tip de device, fara cookies) si{" "}
+          <strong>Microsoft Clarity</strong> (heatmaps si inregistrari
+          anonime ale sesiunilor, cu text si campuri sensibile mascate
+          automat). Clarity foloseste cookies first-party pentru a lega
+          actiunile dintr-o sesiune. Daca nu esti de acord, poti bloca
+          aceste scripturi din extensii precum uBlock Origin sau din
+          setarile browserului.
         </li>
       </ul>
 
