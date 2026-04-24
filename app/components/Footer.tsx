@@ -11,7 +11,9 @@ export default function Footer() {
             Surse de date
           </Link>
           <span className="text-gray-300 dark:text-gray-700">·</span>
-          <span>Navetist {new Date().getFullYear()}</span>
+          <Link href="/despre" className="hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
+            Despre
+          </Link>
         </div>
       </div>
     </footer>
