@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { FeedbackButton } from "../components/FeedbackButton";
 
@@ -43,11 +44,10 @@ export default function DesprePage() {
         <li>
           Istoricul preturilor la metrou din 2000 pana azi, cu toate majorarile.
         </li>
-        <li>Sursele oficiale pentru fiecare tarif.</li>
       </ul>
 
       <h2 className="text-xl font-semibold text-white mt-10 mb-4">
-        Transparenta datelor
+        Sursa datelor
       </h2>
       <p className="text-gray-300 text-[15px] leading-relaxed">
         Toate preturile afisate sunt preluate din sursele oficiale — site-urile
@@ -59,15 +59,8 @@ export default function DesprePage() {
         >
           surse de date
         </Link>
-        . Daca observi o informatie gresita sau invechita, poti semnala
-        prin sectiunea de <FeedbackButton />.
-      </p>
-
-      <h2 className="text-xl font-semibold text-white mt-10 mb-4">Cine sunt</h2>
-      <p className="text-gray-300 text-[15px] leading-relaxed">
-        Ma numesc <strong>Silviu Iordache</strong> si folosesc zilnic
-        transportul public din Bucuresti. Am facut Navetist pentru ca aveam
-        nevoie de el si m-am gandit ca poate e util si altora.
+        . Daca observi o informatie gresita sau invechita, poti semnala prin
+        sectiunea de <FeedbackButton />.
       </p>
 
       <h2 className="text-xl font-semibold text-white mt-10 mb-4">
@@ -109,6 +102,50 @@ export default function DesprePage() {
           uBlock Origin sau din setarile browserului.
         </li>
       </ul>
+
+      <h2 className="text-xl font-semibold text-white mt-10 mb-4">
+        Cine sunt eu
+      </h2>
+      <p className="text-gray-300 text-[15px] leading-relaxed">
+        Ma numesc <strong>Silviu Iordache</strong> si folosesc zilnic
+        transportul public din Bucuresti. Am facut Navetist pentru ca aveam
+        nevoie de el si m-am gandit ca poate e util si altora.
+      </p>
+
+      <h2 className="text-xl font-semibold text-white mt-10 mb-4">Contact</h2>
+      <p className="text-gray-300 text-[15px] leading-relaxed">
+        Ma poti gasi aici:
+      </p>
+
+      <div className="mt-4 flex flex-wrap gap-3 not-prose">
+        <a
+          href="https://www.linkedin.com/in/silviu-iordache-dev/"
+          className="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-200 transition-colors hover:border-sky-500/70 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LinkedIn
+          <ExternalLink className="size-3.5" aria-hidden="true" />
+        </a>
+        <a
+          href="https://x.com/SilviuDude"
+          className="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-200 transition-colors hover:border-sky-500/70 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          X / Twitter
+          <ExternalLink className="size-3.5" aria-hidden="true" />
+        </a>
+        <a
+          href="https://github.com/silviuio"
+          className="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-200 transition-colors hover:border-sky-500/70 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GitHub
+          <ExternalLink className="size-3.5" aria-hidden="true" />
+        </a>
+      </div>
     </div>
   );
 }
