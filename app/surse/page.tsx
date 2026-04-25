@@ -3,7 +3,8 @@ import { faresData } from "../lib/fares";
 
 export const metadata: Metadata = {
   title: "Surse de date — Tarife STB și Metrorex | Navetist",
-  description: "Sursele oficiale folosite pentru tarifele afișate pe Navetist: STB și Metrorex.",
+  description:
+    "Sursele oficiale folosite pentru tarifele afișate pe Navetist: STB și Metrorex.",
 };
 
 const sources = [
@@ -29,9 +30,12 @@ export default function SursePage() {
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
         Surse de date
       </h1>
-      <p className="text-gray-500 dark:text-gray-400 text-sm mb-8">
+      <p className="text-gray-500 dark:text-gray-400 text-sm">
         Toate tarifele afișate pe Navetist sunt preluate direct de pe site-urile
-        oficiale ale operatorilor. Ultima actualizare: {faresData.meta.lastUpdated}.
+        oficiale ale operatorilor.
+      </p>
+      <p className="text-gray-500 dark:text-gray-400 text-sm mb-8">
+        Ultima actualizare: {faresData.meta.lastUpdated}.
       </p>
 
       <div className="space-y-4">
@@ -54,14 +58,20 @@ export default function SursePage() {
                 →
               </span>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{s.description}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+              {s.description}
+            </p>
+            <p className="text-xs text-sky-500 dark:text-sky-400 break-all">
+              {s.href}
+            </p>
           </a>
         ))}
       </div>
 
       <p className="text-xs text-gray-400 dark:text-gray-500 mt-8">
         Navetist nu este afiliat cu STB sau Metrorex. Datele sunt furnizate
-        informativ — verificați întotdeauna tarifele actuale pe site-urile oficiale.
+        informativ — verificați întotdeauna tarifele actuale pe site-urile
+        oficiale.
       </p>
     </div>
   );
