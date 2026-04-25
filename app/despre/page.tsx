@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FeedbackButton } from "../components/FeedbackButton";
 
 export const metadata: Metadata = {
   title: "Despre Navetist — tarife transport public București | Navetist",
@@ -58,14 +59,8 @@ export default function DesprePage() {
         >
           surse de date
         </Link>
-        . Daca observi o informatie gresita sau invechita, imi poti scrie pe{" "}
-        <a
-          href="mailto:contact@navetist.ro"
-          className="text-sky-400 hover:text-sky-300 transition-colors"
-        >
-          contact@navetist.ro
-        </a>
-        .
+        . Daca observi o informatie gresita sau invechita, poti semnala
+        prin sectiunea de <FeedbackButton />.
       </p>
 
       <h2 className="text-xl font-semibold text-white mt-10 mb-4">Cine sunt</h2>
