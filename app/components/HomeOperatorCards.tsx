@@ -9,24 +9,21 @@ const operators = [
     key: "stb" as const,
     href: "/stb",
     title: "Tarife STB",
-    description:
-      "Transport de suprafață — autobuze, tramvaie, troleibuze — în Regiunea București-Ilfov.",
+    description: "Suprafață: autobuz, tramvai, troleibuz.",
     color: "border-emerald-600",
   },
   {
     key: "metrorex" as const,
     href: "/metrorex",
     title: "Tarife Metrorex",
-    description:
-      "Rețeaua de metrou din București cu 5 magistrale și 63 de stații.",
+    description: "Metrou.",
     color: "border-sky-700",
   },
   {
     key: "integrated" as const,
     href: "/integrat",
     title: "Tarife integrate",
-    description:
-      "Bilete și abonamente comune pentru deplasări mixte pe suprafață și metrou.",
+    description: "Suprafață + metrou cu un singur titlu de călătorie.",
     color: "border-slate-500",
   },
 ];

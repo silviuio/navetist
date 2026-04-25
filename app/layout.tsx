@@ -43,6 +43,11 @@ export default function RootLayout({
       lang="ro"
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://tally.so" />
+        <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://c.clarity.ms" />
+      </head>
       <body className="min-h-full flex flex-col bg-zinc-950">
         <Navbar />
         <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
