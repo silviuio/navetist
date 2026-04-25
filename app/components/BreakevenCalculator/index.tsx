@@ -9,12 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { Fare, TripFare } from "../../types/fares";
-import {
-  durationInMonths,
-  periodLabel,
-  getPendingPrice,
-  fmt,
-} from "./utils";
+import { durationInMonths, periodLabel, getPendingPrice, fmt } from "./utils";
 import Counter from "./Counter";
 import FuturePricesToggle from "./FuturePricesToggle";
 import CostBreakdown from "./CostBreakdown";
@@ -46,6 +41,7 @@ export default function BreakevenCalculator(props: Props) {
   const [singleTrips, setSingleTrips] = useState(30);
   const [stbTrips, setStbTrips] = useState(20);
   const [metroTrips, setMetroTrips] = useState(10);
+  const [daysAway, setDaysAway] = useState(21);
 
   // ── Pending prices ────────────────────────────────────────
   const farePending = getPendingPrice(fare.id);
@@ -102,8 +98,13 @@ export default function BreakevenCalculator(props: Props) {
     ? effectiveFarePrice / months
     : effectiveFarePrice;
 
+  // ── Vacanțe / zile fără transport ─────────────────────────
+  // Activ doar la abonamente lungi (6+ luni), unde cumulat contează.
+  const showDaysAway = months >= 6;
+  const activeFraction = showDaysAway ? 1 - daysAway / 365 : 1;
+
   const breakeven = !integrated
-    ? Math.ceil(basePrice / effectiveSinglePrice)
+    ? Math.ceil(basePrice / (effectiveSinglePrice * activeFraction))
     : null;
 
   // La deschiderea dialog-ului, counter-ele pornesc la prag:
@@ -111,7 +112,13 @@ export default function BreakevenCalculator(props: Props) {
   // - integrated: split 50/50 STB/Metrorex astfel încât costul total ≈ basePrice
   const integratedSplit =
     integrated && effectiveStbPrice + effectiveMetroPrice > 0
-      ? Math.max(1, Math.round(basePrice / (effectiveStbPrice + effectiveMetroPrice)))
+      ? Math.max(
+          1,
+          Math.round(
+            basePrice /
+              ((effectiveStbPrice + effectiveMetroPrice) * activeFraction),
+          ),
+        )
       : null;
 
   function openDialog() {
@@ -123,9 +130,13 @@ export default function BreakevenCalculator(props: Props) {
     setOpen(true);
   }
 
-  const currentCost = integrated
+  const baseCurrentCost = integrated
     ? stbTrips * effectiveStbPrice + metroTrips * effectiveMetroPrice
     : singleTrips * effectiveSinglePrice;
+
+  // Reduce costul "fără abonament" proporțional cu zilele plecat,
+  // pentru că în acele zile nu cumperi bilete.
+  const currentCost = baseCurrentCost * activeFraction;
 
   const savings = currentCost - basePrice;
 
@@ -197,20 +208,34 @@ export default function BreakevenCalculator(props: Props) {
             </div>
           </div>
 
+          {showDaysAway && (
+            <div>
+              <p className="text-xs text-zinc-500 uppercase tracking-wide mb-2">
+                Câte zile pe an ești plecat din oraș? (concediu)
+              </p>
+
+              <Counter label="Zile" value={daysAway} onChange={setDaysAway} />
+            </div>
+          )}
+
           <CostBreakdown
             currentCost={currentCost}
             basePrice={basePrice}
             isMultiMonth={isMultiMonth}
             pricesUsedLabel={pricesUsedLabel}
             useFuturePrices={useFuturePrices}
+            daysAway={showDaysAway ? daysAway : 0}
           />
 
           <Verdict savings={savings} displayUnit={displayUnit} />
 
           {isMultiMonth && (
             <p className="text-xs text-zinc-500">
-              Calculat asumând utilizare constantă pe toată perioada ({months}{" "}
-              luni).
+              Calculat pe {months} luni
+              {showDaysAway && daysAway > 0
+                ? `, excluzând ${daysAway} zile/an fără transport`
+                : ""}
+              .
             </p>
           )}
         </DialogContent>
