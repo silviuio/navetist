@@ -33,7 +33,7 @@ const transportItemClass =
 function OperatorDescription({ operatorKey }: { operatorKey: string }) {
   if (operatorKey === "stb") {
     return (
-      <ul className="mb-4 space-y-1.5">
+      <ul className="mb-4 flex flex-wrap gap-x-3 gap-y-1">
         <li className={transportItemClass}>
           <Bus size={ICON_SIZE} className="shrink-0" />
           <span>Autobuz</span>
@@ -61,18 +61,16 @@ function OperatorDescription({ operatorKey }: { operatorKey: string }) {
 
   // integrated
   return (
-    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed flex items-center gap-1.5 flex-wrap">
-      <ul className="mb-4 space-y-1.5">
-        <li className={transportItemClass}>
-          <TrainFrontTunnel size={ICON_SIZE} className="shrink-0" />
-          <span>Metrou</span>
-        </li>
-        <li className={transportItemClass}>
-          <Bus size={ICON_SIZE} className="shrink-0" />
-          <span>STB</span>
-        </li>
-      </ul>
-    </p>
+    <ul className="mb-4 flex flex-wrap gap-x-3 gap-y-1">
+      <li className={transportItemClass}>
+        <TrainFrontTunnel size={ICON_SIZE} className="shrink-0" />
+        <span>Metrou</span>
+      </li>
+      <li className={transportItemClass}>
+        <Bus size={ICON_SIZE} className="shrink-0" />
+        <span>STB</span>
+      </li>
+    </ul>
   );
 }
 
