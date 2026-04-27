@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 import { SITE_URL, SITE_NAME } from "./lib/config";
 import AnalyticsProvider from "./components/analytics/AnalyticsProvider";
 import "./globals.css";
@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
-  description: "Tarife actualizate pentru transportul public din București — STB și Metrorex",
+  description:
+    "Tarife actualizate pentru transportul public din București — STB și Metrorex",
   openGraph: {
     siteName: SITE_NAME,
     locale: "ro_RO",

@@ -1,7 +1,7 @@
+import { getSingleTripFare, pricePerTrip } from "@/app/lib/fares";
+import { Fare, Operator } from "@/app/types/fares";
 import { IdCard, Clock, ArrowLeftRight, Timer } from "lucide-react";
-import { pricePerTrip, getSingleTripFare } from "../lib/fares";
-import type { Fare, Operator } from "../types/fares";
-import BreakevenCalculator from "./BreakevenCalculator";
+import BreakevenCalculator from "../BreakevenCalculator";
 
 const unitRo = (value: number, unit: string): string => {
   const singular: Record<string, string> = {

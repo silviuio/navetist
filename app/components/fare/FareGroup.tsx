@@ -1,6 +1,6 @@
 import { Ticket, CalendarDays } from "lucide-react";
-import type { Fare } from "../types/fares";
 import FareCard from "./FareCard";
+import { Fare } from "@/app/types/fares";
 
 type PendingChange = { newPrice: number };
 
@@ -15,7 +15,7 @@ export default function FareGroup({ title, fares, pendingChanges }: Props) {
 
   return (
     <section>
-      <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide text-sm">
+      <h2 className="flex items-center gap-2 font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide text-sm">
         {title === "Călătorii" && <Ticket size={15} />}
         {title === "Abonamente" && <CalendarDays size={15} />}
         {title}
