@@ -1,32 +1,80 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { Bus, BusFront, TramFront, TrainFrontTunnel } from "lucide-react";
 import { getFaresByOperator } from "../lib/fares";
 import PriceChangeAlert from "./PriceChangeAlert";
 
 const operators = [
   {
-    key: "stb" as const,
-    href: "/stb",
-    title: "Tarife STB",
-    description: "Suprafață: autobuz, tramvai, troleibuz.",
-    color: "border-emerald-600",
-  },
-  {
     key: "metrorex" as const,
     href: "/metrorex",
     title: "Tarife Metrorex",
-    description: "Metrou.",
     color: "border-sky-700",
+  },
+  {
+    key: "stb" as const,
+    href: "/stb",
+    title: "Tarife STB",
+    color: "border-emerald-600",
   },
   {
     key: "integrated" as const,
     href: "/integrat",
     title: "Tarife integrate",
-    description: "Suprafață + metrou cu un singur titlu de călătorie.",
     color: "border-slate-500",
   },
 ];
+
+const ICON_SIZE = 14;
+const transportItemClass =
+  "flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400";
+
+function OperatorDescription({ operatorKey }: { operatorKey: string }) {
+  if (operatorKey === "stb") {
+    return (
+      <ul className="mb-4 space-y-1.5">
+        <li className={transportItemClass}>
+          <Bus size={ICON_SIZE} className="shrink-0" />
+          <span>Autobuz</span>
+        </li>
+        <li className={transportItemClass}>
+          <TramFront size={ICON_SIZE} className="shrink-0" />
+          <span>Tramvai</span>
+        </li>
+        <li className={transportItemClass}>
+          <BusFront size={ICON_SIZE} className="shrink-0" />
+          <span>Troleibuz</span>
+        </li>
+      </ul>
+    );
+  }
+
+  if (operatorKey === "metrorex") {
+    return (
+      <p className={`mb-4 ${transportItemClass}`}>
+        <TrainFrontTunnel size={ICON_SIZE} className="shrink-0" />
+        <span>Metrou</span>
+      </p>
+    );
+  }
+
+  // integrated
+  return (
+    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed flex items-center gap-1.5 flex-wrap">
+      <ul className="mb-4 space-y-1.5">
+        <li className={transportItemClass}>
+          <TrainFrontTunnel size={ICON_SIZE} className="shrink-0" />
+          <span>Metrou</span>
+        </li>
+        <li className={transportItemClass}>
+          <Bus size={ICON_SIZE} className="shrink-0" />
+          <span>STB</span>
+        </li>
+      </ul>
+    </p>
+  );
+}
 
 export default function HomeOperatorCards() {
   const router = useRouter();
@@ -52,9 +100,7 @@ export default function HomeOperatorCards() {
               </span>
             </div>
 
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
-              {operator.description}
-            </p>
+            <OperatorDescription operatorKey={operator.key} />
 
             {operator.key === "metrorex" && (
               <div className="mb-3" onClick={(e) => e.stopPropagation()}>
