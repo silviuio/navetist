@@ -4,7 +4,7 @@ import { faresData } from "../lib/fares";
 export const metadata: Metadata = {
   title: "Surse de date — Tarife STB și Metrorex | Navetist",
   description:
-    "Sursele oficiale folosite pentru tarifele afișate pe Navetist: STB și Metrorex.",
+    "Sursele oficiale folosite pentru tarifele și datele afișate pe Navetist: STB, Metrorex și INSSE.",
 };
 
 const sources = [
@@ -22,6 +22,13 @@ const sources = [
     description:
       "Tarife pentru călătorii și abonamente de metrou, inclusiv reduceri pentru elevi, studenți și donatori de sânge.",
   },
+  {
+    operator: "INSSE",
+    fullName: "Institutul Național de Statistică",
+    href: "https://insse.ro/cms/ro/content/ipc%E2%80%93serie-de-date-anuala",
+    description:
+      "IPC — serie de date anuală: rata anuală a inflației folosită pentru comparația cu prețul biletului de metrou.",
+  },
 ];
 
 export default function SursePage() {
@@ -31,8 +38,8 @@ export default function SursePage() {
         Surse de date
       </h1>
       <p className="text-gray-500 dark:text-gray-400 text-sm">
-        Toate tarifele afișate pe Navetist sunt preluate direct de pe site-urile
-        oficiale ale operatorilor.
+        Tarifele și datele statistice afișate pe Navetist sunt preluate din
+        surse oficiale.
       </p>
       <p className="text-gray-500 dark:text-gray-400 text-sm mb-8">
         Ultima actualizare: {faresData.meta.lastUpdated}.

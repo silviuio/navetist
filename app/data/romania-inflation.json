@@ -1,6 +1,6 @@
 {
-  "source": "INSSE / BNR — date oficiale 2000–2024, estimări BNR pentru 2025–2026",
-  "note": "Rata anuală a inflației IPC (CPI), exprimată procentual. Pentru 2025 s-a folosit mediana intervalului 8.5–9.8%, pentru 2026 mediana 9.0–10.0% (forecast curent).",
+  "source": "INSSE — date oficiale 2000–2025; estimare pentru 2026",
+  "note": "Rata anuală a inflației IPC (CPI), exprimată procentual. Datele 2000–2025 sunt publicate de INSSE; pentru 2026 s-a folosit mediana intervalului 9,0–10,0% (estimare curentă).",
   "yearly": [
     { "year": 2000, "rate": 45.7 },
     { "year": 2001, "rate": 34.5 },
@@ -27,7 +27,7 @@
     { "year": 2022, "rate": 13.8 },
     { "year": 2023, "rate": 10.4 },
     { "year": 2024, "rate": 5.6 },
-    { "year": 2025, "rate": 9.15, "estimate": true },
+    { "year": 2025, "rate": 7.3 },
     { "year": 2026, "rate": 9.5, "estimate": true }
   ]
 }
