@@ -1,5 +1,5 @@
-import { getSingleTripFare, pricePerTrip } from "@/app/lib/fares";
-import { Fare, Operator } from "@/app/types/fares";
+import { getSingleTripFare } from "@/app/lib/fares";
+import type { Duration, Fare, Operator } from "@/app/types/fares";
 import {
   IdCard,
   Clock,
@@ -7,6 +7,7 @@ import {
   CalendarDays,
   ScanLine,
   Hourglass,
+  type LucideIcon,
 } from "lucide-react";
 import BreakevenCalculator from "../BreakevenCalculator";
 
@@ -41,6 +42,71 @@ type Props = {
   pendingChange?: PendingChange;
 };
 
+type FareDetail = {
+  id: string;
+  icon: LucideIcon;
+  label: string;
+};
+
+const durationLabel = (duration: Duration) =>
+  `${duration.value} ${unitRo(duration.value, duration.unit)}`;
+
+const getFareDetails = (fare: Fare): FareDetail[] => {
+  const details: FareDetail[] = [];
+
+  if (fare.category === "trip") {
+    if (fare.validityMinutes) {
+      details.push({
+        id: "validity",
+        icon: Clock,
+        label: `${fare.validityMinutes} min`,
+      });
+    }
+
+    if (fare.transferable) {
+      details.push({
+        id: "transfer",
+        icon: ArrowLeftRight,
+        label: "Transfer",
+      });
+    }
+  }
+
+  if (fare.category === "time-pass" || fare.category === "subscription") {
+    details.push({
+      id: "duration",
+      icon: CalendarDays,
+      label: durationLabel(fare.duration),
+    });
+
+    if (fare.activationWindowMinutes) {
+      details.push({
+        id: "activation-window",
+        icon: Hourglass,
+        label: `${fare.activationWindowMinutes} min`,
+      });
+    }
+
+    if (fare.category === "time-pass" && fare.activationRequired) {
+      details.push({
+        id: "activation",
+        icon: ScanLine,
+        label: "Activare",
+      });
+    }
+
+    if (fare.category === "subscription" && fare.nominalRequired) {
+      details.push({
+        id: "nominal",
+        icon: IdCard,
+        label: "Nominal",
+      });
+    }
+  }
+
+  return details;
+};
+
 const FareCard = ({ fare, pendingChange }: Props) => {
   const isSubscription =
     fare.category === "subscription" || fare.category === "time-pass";
@@ -55,79 +121,31 @@ const FareCard = ({ fare, pendingChange }: Props) => {
   const metroSingleTripFare = isIntegratedSub
     ? getSingleTripFare("metrorex")
     : undefined;
+  const details = getFareDetails(fare);
 
   return (
     <div
       className={`${operatorBg[fare.operator]} text-white rounded-lg flex h-full ${pendingChange ? "ring-1 ring-orange-500/60" : ""}`}
     >
       <div className="flex-1 p-4 flex flex-col">
-        <h3 className="font-semibold text-base leading-snug mb-2">
+        <h3 className="font-semibold text-base leading-snug mb-5">
           {fare.name}
         </h3>
 
-        <div className="text-xs text-gray-300 space-y-1">
-          {fare.category === "trip" && (
-            <>
-              {fare.validityMinutes && (
-                <p className="flex items-center gap-1">
-                  <Clock size={12} className="shrink-0" />
-                  {fare.validityMinutes} min
-                </p>
-              )}
-              {fare.transferable && (
-                <p className="flex items-center gap-1">
-                  <ArrowLeftRight size={12} className="shrink-0" />
-                  Transfer inclus
-                </p>
-              )}
-            </>
-          )}
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-gray-300">
+          {details.map((detail) => {
+            const Icon = detail.icon;
 
-          {fare.category === "time-pass" && (
-            <>
-              <p className="flex items-center gap-1">
-                <CalendarDays size={12} className="shrink-0" />
-                {fare.duration.value}{" "}
-                {unitRo(fare.duration.value, fare.duration.unit)}
+            return (
+              <p
+                key={detail.id}
+                className="flex min-w-0 items-center gap-1 leading-snug"
+              >
+                <Icon size={12} className="shrink-0" />
+                <span className="min-w-0">{detail.label}</span>
               </p>
-
-              {fare.activationWindowMinutes && (
-                <p className="flex items-center gap-1">
-                  <Hourglass size={12} className="shrink-0" />
-                  {fare.activationWindowMinutes} min
-                </p>
-              )}
-
-              {fare.activationRequired && (
-                <p className="flex items-center gap-1">
-                  <ScanLine size={12} className="shrink-0" />
-                  Activare
-                </p>
-              )}
-            </>
-          )}
-
-          {fare.category === "subscription" && (
-            <>
-              <p className="flex items-center gap-1">
-                <CalendarDays size={12} className="shrink-0" />
-                {fare.duration.value}{" "}
-                {unitRo(fare.duration.value, fare.duration.unit)}
-              </p>
-              {fare.activationWindowMinutes && (
-                <p className="flex items-center gap-1">
-                  <Hourglass size={12} className="shrink-0" />
-                  {fare.activationWindowMinutes} min
-                </p>
-              )}
-              {fare.nominalRequired && (
-                <p className="flex items-center gap-1">
-                  <IdCard size={12} className="shrink-0" />
-                  Nominal
-                </p>
-              )}
-            </>
-          )}
+            );
+          })}
         </div>
 
         {singleOperatorTripFare && (
