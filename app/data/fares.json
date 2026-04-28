@@ -323,6 +323,15 @@
       "documentation": "Adeverință de la centrul de transfuzie"
     },
     {
+      "id": "donatori-integrated",
+      "name": "Donatori de sânge",
+      "operator": "integrated",
+      "percentage": 50,
+      "appliesTo": ["integrated-sub-1m"],
+      "discountedPrice": 80,
+      "documentation": "Adeverință de la centrul de transfuzie"
+    },
+    {
       "id": "studenti-metrorex-sub-90",
       "name": "Studenți – reducere 90% abonament lunar",
       "operator": "metrorex",

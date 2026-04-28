@@ -1,4 +1,4 @@
-import { getSingleTripFare } from "@/app/lib/fares";
+import { getDiscountsByFareId, getSingleTripFare } from "@/app/lib/fares";
 import type { Duration, Fare, Operator } from "@/app/types/fares";
 import {
   IdCard,
@@ -7,6 +7,7 @@ import {
   CalendarDays,
   ScanLine,
   Hourglass,
+  Droplet,
   type LucideIcon,
 } from "lucide-react";
 import BreakevenCalculator from "../BreakevenCalculator";
@@ -51,6 +52,8 @@ type FareDetail = {
 
 const durationLabel = (duration: Duration) =>
   `${duration.value} ${unitRo(duration.value, duration.unit)}`;
+
+const formatRon = (value: number) => `${Number(value.toFixed(2))} RON`;
 
 const getFareDetails = (fare: Fare): FareDetail[] => {
   const details: FareDetail[] = [];
@@ -131,6 +134,14 @@ const FareCard = ({ fare, pendingChange }: Props) => {
     ? getSingleTripFare("metrorex")
     : undefined;
   const details = getFareDetails(fare);
+  const donorDiscount = getDiscountsByFareId(fare.id).find(
+    (discount) => discount.name === "Donatori de sânge",
+  );
+  const activePrice = pendingChange?.newPrice ?? fare.price;
+  const donorPrice = donorDiscount
+    ? (activePrice * (100 - donorDiscount.percentage)) / 100
+    : undefined;
+  const donorTooltipId = `${fare.id}-donor-discount-tooltip`;
 
   return (
     <div
@@ -200,6 +211,32 @@ const FareCard = ({ fare, pendingChange }: Props) => {
           <span className="text-orange-400 font-bold text-base whitespace-nowrap">
             {pendingChange.newPrice} RON
           </span>
+        )}
+        {donorPrice !== undefined && (
+          <button
+            type="button"
+            title="Reducere pentru donatori de sânge, pe baza adeverinței de la centrul de transfuzie."
+            aria-describedby={donorTooltipId}
+            className="group relative mt-1 flex cursor-help appearance-none flex-col items-center gap-0.5 rounded-sm text-[11px] font-medium leading-snug text-white/65 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
+          >
+            <span className="flex items-center gap-1 whitespace-nowrap">
+              <Droplet size={11} className="shrink-0" />
+              <span className="decoration-white/35 decoration-dotted underline-offset-2 group-hover:underline group-focus:underline">
+                Donatori
+              </span>
+            </span>
+            <span className="whitespace-nowrap decoration-white/35 decoration-dotted underline-offset-2 group-hover:underline group-focus:underline">
+              {formatRon(donorPrice)}
+            </span>
+            <span
+              id={donorTooltipId}
+              role="tooltip"
+              className="pointer-events-none absolute bottom-full right-0 z-10 mb-2 hidden w-48 rounded-md bg-zinc-950 px-2 py-1.5 text-[11px] leading-snug text-white shadow-lg ring-1 ring-white/10 group-hover:block group-focus:block"
+            >
+              Reducere pentru donatori de sânge, pe baza adeverinței de la
+              centrul de transfuzie.
+            </span>
+          </button>
         )}
       </div>
     </div>
