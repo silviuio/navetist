@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import FareGroup from "../components/FareGroup";
 import { getFaresByOperator } from "../lib/fares";
+import FareGroup from "../components/fare/FareGroup";
 
 export const metadata: Metadata = {
   title:

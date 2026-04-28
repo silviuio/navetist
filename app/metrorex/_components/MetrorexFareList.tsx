@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import FareGroup from "../../components/FareGroup";
 import type { Fare } from "../../types/fares";
+import FareGroup from "@/app/components/fare/FareGroup";
 
 type PendingChange = { newPrice: number };
 
@@ -41,9 +41,7 @@ export default function MetrorexFareList({
         <div className="flex items-center justify-between bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-3">
           <div className="text-sm">
             <p className="font-medium text-white">
-              {useFuturePrices
-                ? "Prețuri de la 1 mai 2026"
-                : "Prețuri actuale"}
+              {useFuturePrices ? "Prețuri de la 1 mai 2026" : "Prețuri actuale"}
             </p>
             <p className="text-xs text-zinc-500 mt-0.5">
               {useFuturePrices
