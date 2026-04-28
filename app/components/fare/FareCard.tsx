@@ -1,6 +1,13 @@
 import { getSingleTripFare, pricePerTrip } from "@/app/lib/fares";
 import { Fare, Operator } from "@/app/types/fares";
-import { IdCard, Clock, ArrowLeftRight, Timer } from "lucide-react";
+import {
+  IdCard,
+  Clock,
+  ArrowLeftRight,
+  CalendarDays,
+  ScanLine,
+  Hourglass,
+} from "lucide-react";
 import BreakevenCalculator from "../BreakevenCalculator";
 
 const unitRo = (value: number, unit: string): string => {
@@ -80,19 +87,38 @@ const FareCard = ({ fare, pendingChange }: Props) => {
           {fare.category === "time-pass" && (
             <>
               <p className="flex items-center gap-1">
-                <Timer size={12} className="shrink-0" />
-                Activare la prima validare
+                <CalendarDays size={12} className="shrink-0" />
+                {fare.duration.value}{" "}
+                {unitRo(fare.duration.value, fare.duration.unit)}
               </p>
+              {fare.activationRequired && (
+                <p className="flex items-center gap-1">
+                  <ScanLine size={12} className="shrink-0" />
+                  Activare
+                </p>
+              )}
+              {fare.activationWindowMinutes && (
+                <p className="flex items-center gap-1">
+                  <Hourglass size={12} className="shrink-0" />
+                  {fare.activationWindowMinutes} min
+                </p>
+              )}
             </>
           )}
 
           {fare.category === "subscription" && (
             <>
               <p className="flex items-center gap-1">
-                <Clock size={12} className="shrink-0" />
+                <CalendarDays size={12} className="shrink-0" />
                 {fare.duration.value}{" "}
                 {unitRo(fare.duration.value, fare.duration.unit)}
               </p>
+              {fare.activationWindowMinutes && (
+                <p className="flex items-center gap-1">
+                  <Hourglass size={12} className="shrink-0" />
+                  {fare.activationWindowMinutes} min
+                </p>
+              )}
               {fare.nominalRequired && (
                 <p className="flex items-center gap-1">
                   <IdCard size={12} className="shrink-0" />

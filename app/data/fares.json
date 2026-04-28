@@ -177,7 +177,8 @@
       "name": "Abonament lunar",
       "price": 100,
       "duration": { "value": 1, "unit": "months" },
-      "activationWindowMinutes": 15
+      "activationWindowMinutes": 15,
+      "nominalRequired": true
     },
     {
       "id": "metrorex-sub-6m",
