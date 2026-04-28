@@ -1,16 +1,46 @@
 {
-  "effectiveDate": "2026-05-01",
-  "operator": "metrorex",
-  "announcement": "Metrorex a anunțat majorarea tarifelor de metrou, valabile de la 1 mai 2026.",
-  "changes": [
-    { "fareId": "metrorex-trip-1", "name": "1 călătorie", "oldPrice": 5, "newPrice": 7 },
-    { "fareId": "metrorex-trip-2", "name": "2 călătorii", "oldPrice": 10, "newPrice": 14 },
-    { "fareId": "metrorex-trip-10", "name": "10 călătorii", "oldPrice": 40, "newPrice": 55 },
-    { "fareId": "metrorex-pass-24h", "name": "Abonament 24 ore", "oldPrice": 12, "newPrice": 18 },
-    { "fareId": "metrorex-pass-72h", "name": "Abonament 72 ore", "oldPrice": 35, "newPrice": 50 },
-    { "fareId": "metrorex-pass-7d", "name": "Abonament săptămânal", "oldPrice": 45, "newPrice": 60 },
-    { "fareId": "metrorex-sub-1m", "name": "Abonament lunar", "oldPrice": 100, "newPrice": 140 },
-    { "fareId": "metrorex-sub-6m", "name": "Abonament 6 luni", "oldPrice": 500, "newPrice": 700 },
-    { "fareId": "metrorex-sub-12m", "name": "Abonament anual", "oldPrice": 900, "newPrice": 1300 }
+  "announcements": [
+    {
+      "effectiveDate": "2026-05-01",
+      "operator": "metrorex",
+      "operatorLabel": "Metrorex",
+      "buttonLabel": "Scumpiri anunțate de la 1 mai",
+      "title": "Majorare tarife metrou",
+      "announcement": "Metrorex a anunțat majorarea tarifelor de metrou, valabile de la 1 mai 2026.",
+      "note": "Elevii și studenții beneficiază în continuare de gratuitate și reducere 90%.",
+      "historyHref": "/metrorex/istoric",
+      "historyLabel": "Vezi evoluția prețurilor din 2000 până azi",
+      "changes": [
+        { "fareId": "metrorex-trip-1", "name": "1 călătorie", "oldPrice": 5, "newPrice": 7 },
+        { "fareId": "metrorex-trip-2", "name": "2 călătorii", "oldPrice": 10, "newPrice": 14 },
+        { "fareId": "metrorex-trip-10", "name": "10 călătorii", "oldPrice": 40, "newPrice": 55 },
+        { "fareId": "metrorex-pass-24h", "name": "Abonament 24 ore", "oldPrice": 12, "newPrice": 18 },
+        { "fareId": "metrorex-pass-72h", "name": "Abonament 72 ore", "oldPrice": 35, "newPrice": 50 },
+        { "fareId": "metrorex-pass-7d", "name": "Abonament săptămânal", "oldPrice": 45, "newPrice": 60 },
+        { "fareId": "metrorex-sub-1m", "name": "Abonament lunar", "oldPrice": 100, "newPrice": 140 },
+        { "fareId": "metrorex-sub-6m", "name": "Abonament 6 luni", "oldPrice": 500, "newPrice": 700 },
+        { "fareId": "metrorex-sub-12m", "name": "Abonament anual", "oldPrice": 900, "newPrice": 1300 }
+      ]
+    },
+    {
+      "effectiveDate": "2026-05-01",
+      "operator": "integrated",
+      "operatorLabel": "Metrorex + STB",
+      "buttonLabel": "Scumpiri anunțate de la 1 mai",
+      "title": "Majorare tarife integrate",
+      "announcement": "Tarifele integrate Metrorex + STB au majorări anunțate de la 1 mai 2026.",
+      "note": "Titlurile integrate rămân valabile pe metrou și pe rețeaua de suprafață STB, în limita duratei fiecărui titlu.",
+      "changes": [
+        { "fareId": "integrated-trip-1", "name": "1 călătorie 120 min.", "oldPrice": 7, "newPrice": 9 },
+        { "fareId": "integrated-trip-2", "name": "2 călătorii 120 min.", "oldPrice": 14, "newPrice": 18 },
+        { "fareId": "integrated-trip-10", "name": "10 călătorii 120 min.", "oldPrice": 59, "newPrice": 72 },
+        { "fareId": "integrated-pass-24h", "name": "Abonament 24 h", "oldPrice": 18, "newPrice": 23 },
+        { "fareId": "integrated-pass-72h", "name": "Abonament 72 h", "oldPrice": 49, "newPrice": 62 },
+        { "fareId": "integrated-pass-7d", "name": "Abonament 7 zile", "oldPrice": 66, "newPrice": 79 },
+        { "fareId": "integrated-sub-1m", "name": "Abonament 1 lună", "oldPrice": 160, "newPrice": 196 },
+        { "fareId": "integrated-sub-6m", "name": "Abonament 6 luni", "oldPrice": 800, "newPrice": 980 },
+        { "fareId": "integrated-sub-12m", "name": "Abonament 12 luni", "oldPrice": 1410, "newPrice": 1770 }
+      ]
+    }
   ]
 }

@@ -12,8 +12,14 @@ export const metadata: Metadata = {
     "Tarife actuale Metrorex și scumpirile anunțate de la 1 mai 2026: bilet 1, 2 și 10 călătorii, abonamente 24h, 72h, săptămânal, lunar, 6 luni și anual pentru metroul din București.",
 };
 
+const metrorexAnnouncement = upcomingChanges.announcements.find(
+  (announcement) => announcement.operator === "metrorex",
+);
 const pendingChanges = Object.fromEntries(
-  upcomingChanges.changes.map((c) => [c.fareId, { newPrice: c.newPrice }]),
+  (metrorexAnnouncement?.changes ?? []).map((change) => [
+    change.fareId,
+    { newPrice: change.newPrice },
+  ]),
 );
 
 export default function MetrorexPage() {

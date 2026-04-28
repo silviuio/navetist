@@ -87,9 +87,9 @@ export default function HomeOperatorCard({
 
       <OperatorDescription operatorKey={operatorKey} />
 
-      {operatorKey === "metrorex" && (
+      {(operatorKey === "metrorex" || operatorKey === "integrated") && (
         <div className="mb-3" onClick={(e) => e.stopPropagation()}>
-          <PriceChangeAlert />
+          <PriceChangeAlert operator={operatorKey} />
         </div>
       )}
 

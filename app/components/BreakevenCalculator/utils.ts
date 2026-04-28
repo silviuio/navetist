@@ -28,7 +28,9 @@ export function periodLabel(fare: Fare): string {
 }
 
 export function getPendingPrice(fareId: string): number | undefined {
-  return upcomingChanges.changes.find((c) => c.fareId === fareId)?.newPrice;
+  return upcomingChanges.announcements
+    .flatMap((announcement) => announcement.changes)
+    .find((change) => change.fareId === fareId)?.newPrice;
 }
 
 export function fmt(n: number): string {
