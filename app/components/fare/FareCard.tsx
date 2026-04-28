@@ -68,7 +68,6 @@ const FareCard = ({ fare, pendingChange }: Props) => {
         <div className="text-xs text-gray-300 space-y-1">
           {fare.category === "trip" && (
             <>
-              <p>{+pricePerTrip(fare).toFixed(2)} RON / călătorie</p>
               {fare.validityMinutes && (
                 <p className="flex items-center gap-1">
                   <Clock size={12} className="shrink-0" />
@@ -91,16 +90,18 @@ const FareCard = ({ fare, pendingChange }: Props) => {
                 {fare.duration.value}{" "}
                 {unitRo(fare.duration.value, fare.duration.unit)}
               </p>
-              {fare.activationRequired && (
-                <p className="flex items-center gap-1">
-                  <ScanLine size={12} className="shrink-0" />
-                  Activare
-                </p>
-              )}
+
               {fare.activationWindowMinutes && (
                 <p className="flex items-center gap-1">
                   <Hourglass size={12} className="shrink-0" />
                   {fare.activationWindowMinutes} min
+                </p>
+              )}
+
+              {fare.activationRequired && (
+                <p className="flex items-center gap-1">
+                  <ScanLine size={12} className="shrink-0" />
+                  Activare
                 </p>
               )}
             </>
