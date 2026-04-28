@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getFaresByOperator } from "../lib/fares";
-import FareGroup from "../components/fare/FareGroup";
+import { getPendingChangesByOperator } from "../lib/upcomingChanges";
+import IntegratedFareList from "./_components/IntegratedFareList";
 
 export const metadata: Metadata = {
   title:
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 
 export default function IntegratPage() {
   const fares = getFaresByOperator("integrated");
+  const pendingChanges = getPendingChangesByOperator("integrated");
   const trips = fares.filter((f) => f.category === "trip");
   const subscriptions = fares.filter(
     (f) => f.category === "time-pass" || f.category === "subscription",
@@ -38,10 +40,11 @@ export default function IntegratPage() {
         </p>
       </div>
 
-      <div className="space-y-8">
-        <FareGroup title="Călătorii" fares={trips} />
-        <FareGroup title="Abonamente" fares={subscriptions} />
-      </div>
+      <IntegratedFareList
+        trips={trips}
+        subscriptions={subscriptions}
+        pendingChanges={pendingChanges}
+      />
     </div>
   );
 }

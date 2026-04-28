@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import upcomingChanges from "../data/upcoming-changes.json";
-import type { Operator } from "../types/fares";
+import upcomingChanges from "../../data/upcoming-changes.json";
+import type { Operator } from "../../types/fares";
 
 type Props = {
   operator: Operator;
@@ -83,9 +83,7 @@ export default function PriceChangeAlert({ operator }: Props) {
             ))}
           </div>
 
-          <p className="text-xs text-zinc-500 mt-2">
-            {announcement.note}
-          </p>
+          <p className="text-xs text-zinc-500 mt-2">{announcement.note}</p>
 
           {"historyHref" in announcement && announcement.historyHref && (
             <Link

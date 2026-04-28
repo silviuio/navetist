@@ -1,5 +1,5 @@
 import type { Fare } from "../../types/fares";
-import upcomingChanges from "../../data/upcoming-changes.json";
+import { getPendingPrice as getAnnouncedPrice } from "../../lib/upcomingChanges";
 
 export function durationInMonths(fare: Fare): number | null {
   if (fare.category !== "subscription" && fare.category !== "time-pass")
@@ -28,9 +28,7 @@ export function periodLabel(fare: Fare): string {
 }
 
 export function getPendingPrice(fareId: string): number | undefined {
-  return upcomingChanges.announcements
-    .flatMap((announcement) => announcement.changes)
-    .find((change) => change.fareId === fareId)?.newPrice;
+  return getAnnouncedPrice(fareId);
 }
 
 export function fmt(n: number): string {

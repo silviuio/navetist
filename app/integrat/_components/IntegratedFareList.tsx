@@ -8,7 +8,7 @@ type Props = {
   pendingChanges: PendingChanges;
 };
 
-export default function MetrorexFareList({
+export default function IntegratedFareList({
   trips,
   subscriptions,
   pendingChanges,
@@ -18,8 +18,8 @@ export default function MetrorexFareList({
       trips={trips}
       subscriptions={subscriptions}
       pendingChanges={pendingChanges}
-      alertTitle="Majorare tarife Metrorex de la 1 mai 2026"
-      alertDescription="Tarifele marcate cu portocaliu vor crește. Elevii și studenții beneficiază în continuare de gratuitate și reducere 90%."
+      alertTitle="Majorare tarife integrate de la 1 mai 2026"
+      alertDescription="Tarifele marcate cu portocaliu vor crește pentru titlurile comune Metrorex + STB."
     />
   );
 }

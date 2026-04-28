@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { Bus, BusFront, TramFront, TrainFrontTunnel } from "lucide-react";
-import type { Operator } from "../types/fares";
-import { getFaresByOperator } from "../lib/fares";
+import type { Operator } from "../../types/fares";
+import { getFaresByOperator } from "../../lib/fares";
 import PriceChangeAlert from "./PriceChangeAlert";
 
 type Props = {

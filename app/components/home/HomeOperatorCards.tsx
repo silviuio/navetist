@@ -1,5 +1,5 @@
+import { Operator } from "@/app/types/fares";
 import HomeOperatorCard from "./HomeOperatorCard";
-import type { Operator } from "../types/fares";
 
 type OperatorConfig = {
   key: Operator;

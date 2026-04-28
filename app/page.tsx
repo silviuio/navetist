@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import HomeOperatorCards from "./components/HomeOperatorCards";
-import PriceHistoryLink from "./components/PriceHistoryLink";
+import PriceHistoryLink from "./components/home/PriceHistoryLink";
+import HomeOperatorCards from "./components/home/HomeOperatorCards";
 
 export const metadata: Metadata = {
   title: "Tarife transport public București 2026 — STB și Metrorex | Navetist",
