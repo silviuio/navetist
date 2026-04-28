@@ -4,7 +4,10 @@
   "announcement": "Metrorex a anunțat majorarea tarifelor de metrou, valabile de la 1 mai 2026.",
   "changes": [
     { "fareId": "metrorex-trip-1", "name": "1 călătorie", "oldPrice": 5, "newPrice": 7 },
+    { "fareId": "metrorex-trip-2", "name": "2 călătorii", "oldPrice": 10, "newPrice": 14 },
+    { "fareId": "metrorex-trip-10", "name": "10 călătorii", "oldPrice": 40, "newPrice": 55 },
     { "fareId": "metrorex-pass-24h", "name": "Abonament 24 ore", "oldPrice": 12, "newPrice": 18 },
+    { "fareId": "metrorex-pass-72h", "name": "Abonament 72 ore", "oldPrice": 35, "newPrice": 50 },
     { "fareId": "metrorex-pass-7d", "name": "Abonament săptămânal", "oldPrice": 45, "newPrice": 60 },
     { "fareId": "metrorex-sub-1m", "name": "Abonament lunar", "oldPrice": 100, "newPrice": 140 },
     { "fareId": "metrorex-sub-6m", "name": "Abonament 6 luni", "oldPrice": 500, "newPrice": 700 },
