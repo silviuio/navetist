@@ -46,6 +46,7 @@ type FareDetail = {
   id: string;
   icon: LucideIcon;
   label: string;
+  tooltip: string;
 };
 
 const durationLabel = (duration: Duration) =>
@@ -60,6 +61,7 @@ const getFareDetails = (fare: Fare): FareDetail[] => {
         id: "validity",
         icon: Clock,
         label: `${fare.validityMinutes} min`,
+        tooltip: `Valabilitate ${fare.validityMinutes} min`,
       });
     }
 
@@ -68,6 +70,8 @@ const getFareDetails = (fare: Fare): FareDetail[] => {
         id: "transfer",
         icon: ArrowLeftRight,
         label: "Transfer",
+        tooltip:
+          "Permite continuarea călătoriei cu alt vehicul în perioada de valabilitate.",
       });
     }
   }
@@ -77,6 +81,7 @@ const getFareDetails = (fare: Fare): FareDetail[] => {
       id: "duration",
       icon: CalendarDays,
       label: durationLabel(fare.duration),
+      tooltip: `Valabilitate ${durationLabel(fare.duration)}`,
     });
 
     if (fare.activationWindowMinutes) {
@@ -84,6 +89,7 @@ const getFareDetails = (fare: Fare): FareDetail[] => {
         id: "activation-window",
         icon: Hourglass,
         label: `${fare.activationWindowMinutes} min`,
+        tooltip: `Poate fi revalidat după ${fare.activationWindowMinutes} min de la validarea anterioară.`,
       });
     }
 
@@ -92,6 +98,7 @@ const getFareDetails = (fare: Fare): FareDetail[] => {
         id: "activation",
         icon: ScanLine,
         label: "Activare",
+        tooltip: "Necesită activare la prima călătorie.",
       });
     }
 
@@ -100,6 +107,8 @@ const getFareDetails = (fare: Fare): FareDetail[] => {
         id: "nominal",
         icon: IdCard,
         label: "Nominal",
+        tooltip:
+          "Este asociat unei singure persoane și nu poate fi folosit de altcineva.",
       });
     }
   }
@@ -135,15 +144,28 @@ const FareCard = ({ fare, pendingChange }: Props) => {
         <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-gray-300">
           {details.map((detail) => {
             const Icon = detail.icon;
+            const tooltipId = `${fare.id}-${detail.id}-tooltip`;
 
             return (
-              <p
+              <button
                 key={detail.id}
-                className="flex min-w-0 items-center gap-1 leading-snug"
+                type="button"
+                title={detail.tooltip}
+                aria-describedby={tooltipId}
+                className="group relative flex min-w-0 cursor-help appearance-none items-center gap-1 rounded-sm text-left leading-snug focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
               >
                 <Icon size={12} className="shrink-0" />
-                <span className="min-w-0">{detail.label}</span>
-              </p>
+                <span className="min-w-0 decoration-white/35 decoration-dotted underline-offset-2 group-hover:underline group-focus:underline">
+                  {detail.label}
+                </span>
+                <span
+                  id={tooltipId}
+                  role="tooltip"
+                  className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 hidden w-48 rounded-md bg-zinc-950 px-2 py-1.5 text-[11px] leading-snug text-white shadow-lg ring-1 ring-white/10 group-hover:block group-focus:block"
+                >
+                  {detail.tooltip}
+                </span>
+              </button>
             );
           })}
         </div>
