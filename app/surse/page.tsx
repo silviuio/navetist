@@ -4,30 +4,78 @@ import { faresData } from "../lib/fares";
 export const metadata: Metadata = {
   title: "Surse de date — Tarife STB și Metrorex | Navetist",
   description:
-    "Sursele oficiale folosite pentru tarifele și datele afișate pe Navetist: STB, Metrorex și INSSE.",
+    "Sursele folosite pentru tarifele și datele afișate pe Navetist: STB, Metrorex, INSSE și articole de presă.",
 };
 
-const sources = [
+type SourceLink = {
+  label: string;
+  href: string;
+  dateLabel?: string;
+};
+
+type SourceCard = {
+  operator: string;
+  fullName: string;
+  description: string;
+  links: SourceLink[];
+};
+
+const sources: SourceCard[] = [
   {
     operator: "STB",
     fullName: "Societatea de Transport București",
-    href: faresData.meta.sources.stb,
     description:
       "Tarife pentru călătorii metropolitane (suprafață) și abonamente STB, inclusiv reduceri pentru donatori de sânge.",
+    links: [{ label: "Tarife STB", href: faresData.meta.sources.stb }],
   },
   {
     operator: "Metrorex",
     fullName: "Metrorex S.A.",
-    href: faresData.meta.sources.metrorex,
     description:
       "Tarife pentru călătorii și abonamente de metrou, inclusiv reduceri pentru elevi, studenți și donatori de sânge.",
+    links: [
+      { label: "Tarife Metrorex", href: faresData.meta.sources.metrorex },
+    ],
   },
   {
     operator: "INSSE",
     fullName: "Institutul Național de Statistică",
-    href: "https://insse.ro/cms/ro/content/ipc%E2%80%93serie-de-date-anuala",
     description:
       "IPC — serie de date anuală: rata anuală a inflației folosită pentru comparația cu prețul biletului de metrou.",
+    links: [
+      {
+        label: "IPC — serie de date anuală",
+        href: "https://insse.ro/cms/ro/content/ipc%E2%80%93serie-de-date-anuala",
+      },
+    ],
+  },
+  {
+    operator: "Știri",
+    fullName: "Articole despre majorarea tarifelor Metrorex",
+    description:
+      "Articole folosite pentru contextul public al majorării și al propunerii de amânare.",
+    links: [
+      {
+        dateLabel: "28.04.2026",
+        label: "B365",
+        href: "https://b365.ro/breaking-calatoria-cu-metroul-nu-se-mai-scumpeste-de-la-1-mai-ministrul-transporturilor-cere-metrorex-un-plan-de-reducere-a-cheltuielilor-cand-ar-urma-sa-creasca-tarifele-603456/",
+      },
+      {
+        dateLabel: "28.04.2026",
+        label: "HotNews",
+        href: "https://hotnews.ro/scumpire-metrou-amanata-ministrul-interimar-al-transporturilor-radu-miruta-2231239",
+      },
+      {
+        dateLabel: "25.04.2026",
+        label: "HotNews",
+        href: "https://hotnews.ro/scumpiri-la-metrou-de-la-1-mai-o-calatorie-va-costa-7-lei-ordinul-publicat-in-monitorul-oficial-2228965",
+      },
+      {
+        dateLabel: "22.04.2026",
+        label: "HotNews",
+        href: "https://hotnews.ro/oficial-calatoria-cu-metroul-se-scumpeste-cu-40-ministrul-serban-a-semnat-ordinul-cu-o-zi-inainte-sa-si-dea-demisia-2226505",
+      },
+    ],
   },
 ];
 
@@ -47,31 +95,44 @@ export default function SursePage() {
 
       <div className="space-y-4">
         {sources.map((s) => (
-          <a
+          <div
             key={s.operator}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 hover:shadow-md transition-shadow group"
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5"
           >
-            <div className="flex items-center justify-between mb-1">
-              <div>
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  {s.operator}
-                </span>
-                <span className="text-gray-400 text-sm ml-2">{s.fullName}</span>
-              </div>
-              <span className="text-gray-400 group-hover:translate-x-1 transition-transform">
-                →
+            <div className="mb-1">
+              <span className="font-semibold text-gray-900 dark:text-white">
+                {s.operator}
               </span>
+              <span className="text-gray-400 text-sm ml-2">{s.fullName}</span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
               {s.description}
             </p>
-            <p className="text-xs text-sky-500 dark:text-sky-400 break-all">
-              {s.href}
-            </p>
-          </a>
+            <div className="space-y-2">
+              {s.links.map((link) => (
+                <div key={link.href} className="text-xs sm:flex sm:gap-3">
+                  {link.dateLabel && (
+                    <span className="mb-0.5 block shrink-0 text-gray-400 dark:text-gray-500 sm:w-28">
+                      {link.dateLabel}
+                    </span>
+                  )}
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block min-w-0 text-sky-500 dark:text-sky-400 break-all hover:text-sky-600 dark:hover:text-sky-300 transition-colors"
+                  >
+                    <span className="font-medium">{link.label}</span>
+                    <span className="text-gray-400 dark:text-gray-600">
+                      {" "}
+                      ·{" "}
+                    </span>
+                    {link.href}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
 
