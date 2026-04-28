@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
+import InflationConclusion from "./_components/InflationConclusion";
 import PriceChart from "./_components/PriceChart";
 import PriceHistoryTable from "./_components/PriceHistoryTable";
-import {
-  inflationDataNote,
-  latestPriceHistoryEntry,
-} from "./_components/priceHistoryData";
+import { inflationDataNote } from "./_components/priceHistoryData";
 
 export const metadata: Metadata = {
   title: "Evoluția prețului biletului de metrou București 2000–2026 | Navetist",
@@ -18,11 +16,6 @@ export const metadata: Metadata = {
 };
 
 export default function MetrorexIstoricPage() {
-  const finalDifferencePercent =
-    latestPriceHistoryEntry.inflationDifferencePercent.toLocaleString("ro-RO", {
-      maximumFractionDigits: 1,
-    });
-
   return (
     <div className="min-w-0">
       <div className="mb-6">
@@ -35,28 +28,7 @@ export default function MetrorexIstoricPage() {
         </p>
       </div>
 
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 mb-6">
-        <p className="text-sm text-zinc-300 leading-6 max-w-3xl">
-          Raportat la inflația cumulată, biletul de metrou nu a crescut constant
-          peste puterea de cumpărare: în multe perioade a rămas sub nivelul la
-          care ar fi ajuns dacă urma strict inflația. Majorarea anunțată pentru
-          mai 2026 duce prețul la{" "}
-          <span className="font-semibold text-orange-300">
-            {latestPriceHistoryEntry.priceFmt}
-          </span>
-          , față de aproximativ{" "}
-          <span className="font-semibold text-orange-300">
-            {latestPriceHistoryEntry.inflationAdjustedPriceFmt}
-          </span>{" "}
-          dacă prețul din 2000 ar fi fost indexat anual cu inflația:{" "}
-          <span className="font-semibold text-white">
-            {latestPriceHistoryEntry.inflationDifferenceFmt} (
-            {finalDifferencePercent}%)
-          </span>{" "}
-          peste acest reper.
-        </p>
-      </div>
-
+      <InflationConclusion />
       <PriceChart />
       <PriceHistoryTable />
 

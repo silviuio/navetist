@@ -1,5 +1,13 @@
 import { priceHistoryData } from "./priceHistoryData";
 
+function getDifferenceColor(differencePercent: number): string {
+  if (Math.abs(differencePercent) < 5) {
+    return "text-zinc-400";
+  }
+
+  return differencePercent > 0 ? "text-rose-300/80" : "text-emerald-300/80";
+}
+
 export default function PriceHistoryTable() {
   return (
     <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden mb-6 min-w-0 max-w-full">
@@ -50,16 +58,11 @@ export default function PriceHistoryTable() {
                   {entry.inflationAdjustedPriceFmt}
                 </td>
                 <td
-                  className={`px-4 py-3 font-semibold tabular-nums ${
-                    entry.inflationDifference >= 0
-                      ? "text-orange-300"
-                      : "text-zinc-400"
-                  }`}
+                  className={`px-4 py-3 font-semibold tabular-nums ${getDifferenceColor(
+                    entry.inflationDifferencePercent,
+                  )}`}
                 >
-                  <span>{entry.inflationDifferenceFmt}</span>
-                  <span className="block text-xs font-normal text-zinc-500">
-                    {entry.inflationComparisonLabel}
-                  </span>
+                  {entry.inflationDifferenceFmt}
                 </td>
                 <td
                   className={`px-4 py-3 font-semibold tabular-nums ${
