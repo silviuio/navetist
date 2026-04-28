@@ -74,7 +74,7 @@ export default function HomeOperatorCard({
   return (
     <div
       onClick={() => router.push(href)}
-      className={`group flex flex-col bg-white dark:bg-zinc-900 rounded-xl border-t-4 ${color} shadow-sm hover:shadow-md transition-shadow p-5 cursor-pointer`}
+      className={`group flex flex-col bg-white/40 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900 rounded-xl border-t-4 ${color} shadow-sm hover:shadow-md transition p-5 cursor-pointer`}
     >
       <div className="flex items-start justify-between mb-3">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
