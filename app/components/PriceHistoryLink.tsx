@@ -16,7 +16,7 @@ export default function PriceHistoryLink() {
             Evoluția prețurilor la metrou
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Din 2000 până azi — toate majorările într-un grafic
+            Din 2000 până în 2026
           </p>
         </div>
       </div>
