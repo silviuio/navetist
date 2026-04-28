@@ -2,8 +2,9 @@
 
 import {
   Area,
-  AreaChart,
   CartesianGrid,
+  ComposedChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -25,14 +26,27 @@ function CustomTooltip({
 }) {
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
+  const isAboveInflation = d.inflationDifference >= 0;
+
   return (
     <div className="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm shadow-lg">
       <p className="font-semibold text-white mb-0.5">{d.label}</p>
-      <p
-        className={`font-bold text-lg ${d.upcoming ? "text-orange-400" : "text-sky-400"}`}
-      >
-        {d.priceFmt}
-      </p>
+      <div className="space-y-1">
+        <p
+          className={`font-bold text-lg ${d.upcoming ? "text-orange-400" : "text-sky-400"}`}
+        >
+          {d.priceFmt}
+        </p>
+        <p className="text-orange-300 text-xs">
+          Dacă urma inflația:{" "}
+          <span className="font-semibold">{d.inflationAdjustedPriceFmt}</span>
+        </p>
+        <p
+          className={`text-xs ${isAboveInflation ? "text-orange-300" : "text-zinc-400"}`}
+        >
+          Diferență: {d.inflationDifferenceFmt} ({d.inflationComparisonLabel})
+        </p>
+      </div>
       {d.note && (
         <p className="text-zinc-400 text-xs mt-1 max-w-[180px]">{d.note}</p>
       )}
@@ -44,20 +58,24 @@ export default function PriceChart() {
   const upcomingEntry = priceHistoryData.find((e) => e.upcoming);
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-6">
-      <div className="flex items-center gap-4 mb-6 text-sm">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6 mb-6 overflow-hidden min-w-0">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-6 text-sm">
         <div className="flex items-center gap-1.5">
           <span className="w-3 h-3 rounded-full bg-sky-400 inline-block" />
-          <span className="text-zinc-400">Preț confirmat</span>
+          <span className="text-zinc-400">Bilet metrou</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-5 border-t-2 border-dashed border-orange-300 inline-block" />
+          <span className="text-zinc-400">Inflație</span>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="w-3 h-3 rounded-full bg-orange-400 inline-block" />
-          <span className="text-zinc-400">Majorare anunțată</span>
+          <span className="text-zinc-400">Preț 2026 anunțat</span>
         </div>
       </div>
 
       <ResponsiveContainer width="100%" height={320}>
-        <AreaChart
+        <ComposedChart
           data={priceHistoryData}
           margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
         >
@@ -123,7 +141,16 @@ export default function PriceChart() {
             }}
             activeDot={{ r: 7, fill: "#38bdf8" }}
           />
-        </AreaChart>
+          <Line
+            type="monotone"
+            dataKey="inflationAdjustedPrice"
+            stroke="#fdba74"
+            strokeWidth={2}
+            strokeDasharray="6 5"
+            dot={false}
+            activeDot={{ r: 5, fill: "#fdba74", stroke: "#fdba74" }}
+          />
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );

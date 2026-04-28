@@ -1,21 +1,30 @@
 import type { Metadata } from "next";
 import PriceChart from "./_components/PriceChart";
 import PriceHistoryTable from "./_components/PriceHistoryTable";
+import {
+  inflationDataNote,
+  latestPriceHistoryEntry,
+} from "./_components/priceHistoryData";
 
 export const metadata: Metadata = {
   title: "Evoluția prețului biletului de metrou București 2000–2026 | Navetist",
   description:
-    "Istoricul complet al prețurilor la metroul din București: de la ~1 RON în 2000 la 7 RON din mai 2026. Grafic și tabel cu toate majorările Metrorex în ultimii 25 de ani.",
+    "Istoricul complet al prețurilor la metroul din București: de la ~1 RON în 2000 la 7 RON din mai 2026, comparat cu inflația cumulată.",
   openGraph: {
     title: "Evoluția prețului biletului de metrou București 2000–2026",
     description:
-      "De la 1 RON în 2000 la 7 RON în 2026 — vezi cum a evoluat prețul călătoriei cu metroul în București.",
+      "De la 1 RON în 2000 la 7 RON în 2026 — vezi cum a evoluat prețul călătoriei cu metroul în București față de inflație.",
   },
 };
 
 export default function MetrorexIstoricPage() {
+  const finalDifferencePercent =
+    latestPriceHistoryEntry.inflationDifferencePercent.toLocaleString("ro-RO", {
+      maximumFractionDigits: 1,
+    });
+
   return (
-    <div>
+    <div className="min-w-0">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-white mb-1">
           Evoluția prețului biletului de metrou
@@ -26,13 +35,37 @@ export default function MetrorexIstoricPage() {
         </p>
       </div>
 
+      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 mb-6">
+        <p className="text-sm text-zinc-300 leading-6 max-w-3xl">
+          Raportat la inflația cumulată, biletul de metrou nu a crescut constant
+          peste puterea de cumpărare: în multe perioade a rămas sub nivelul la
+          care ar fi ajuns dacă urma strict inflația. Majorarea anunțată pentru
+          mai 2026 duce prețul la{" "}
+          <span className="font-semibold text-orange-300">
+            {latestPriceHistoryEntry.priceFmt}
+          </span>
+          , față de aproximativ{" "}
+          <span className="font-semibold text-orange-300">
+            {latestPriceHistoryEntry.inflationAdjustedPriceFmt}
+          </span>{" "}
+          dacă prețul din 2000 ar fi fost indexat anual cu inflația:{" "}
+          <span className="font-semibold text-white">
+            {latestPriceHistoryEntry.inflationDifferenceFmt} (
+            {finalDifferencePercent}%)
+          </span>{" "}
+          peste acest reper.
+        </p>
+      </div>
+
       <PriceChart />
       <PriceHistoryTable />
 
-      <p className="text-xs text-zinc-600">
-        * Datele dinainte de 2010 sunt estimative — prețul per călătorie este
-        dedus din împărțirea prețului cartelei disponibile la momentul respectiv
-        (2 sau 10 călătorii).
+      <p className="text-xs text-zinc-600 leading-5">
+        * Datele despre preț dinainte de 2010 sunt estimative — prețul per
+        călătorie este dedus din împărțirea prețului cartelei disponibile la
+        momentul respectiv (2 sau 10 călătorii). Pentru comparația cu inflația,
+        calculul pornește de la 1 RON în 2000 și aplică inflația anuală din 2001
+        până în anul fiecărei observații. {inflationDataNote}
       </p>
     </div>
   );
