@@ -10,19 +10,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import upcomingChanges from "../../data/upcoming-changes.json";
+import { formatDateRoLong } from "../../lib/dates";
 import type { Operator } from "../../types/fares";
 
 type Props = {
   operator: Operator;
 };
-
-function formatDateLabel(date: string): string {
-  return new Date(date).toLocaleDateString("ro-RO", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 function formatPrice(price: number): string {
   return `${price.toLocaleString("ro-RO")} RON`;
@@ -49,7 +42,9 @@ export default function PriceChangeAlert({ operator }: Props) {
         className="flex items-center gap-1.5 text-xs font-semibold bg-orange-500/20 text-orange-400 border border-orange-500/30 px-2.5 py-1 rounded-full hover:bg-orange-500/30 transition-colors"
       >
         <span>⚠</span>
-        <span>{announcement.buttonLabel}</span>
+        <span>
+          Scumpiri anunțate de la {formatDateRoLong(announcement.effectiveDate)}
+        </span>
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -57,7 +52,7 @@ export default function PriceChangeAlert({ operator }: Props) {
           <DialogHeader>
             <span className="text-xs font-semibold bg-orange-500/20 text-orange-400 border border-orange-500/30 px-2 py-0.5 rounded-full w-fit">
               {announcement.operatorLabel} ·{" "}
-              {formatDateLabel(announcement.effectiveDate)}
+              {formatDateRoLong(announcement.effectiveDate)}
             </span>
             <DialogTitle className="text-white text-lg mt-2">
               {announcement.title}

@@ -75,6 +75,11 @@ const sources: SourceCard[] = [
         label: "HotNews",
         href: "https://hotnews.ro/oficial-calatoria-cu-metroul-se-scumpeste-cu-40-ministrul-serban-a-semnat-ordinul-cu-o-zi-inainte-sa-si-dea-demisia-2226505",
       },
+      {
+        dateLabel: "29.04.2026",
+        label: "HotNews",
+        href: "https://hotnews.ro/scumpirea-biletului-de-la-metrou-amanata-pentru-60-de-zile-decizie-oficiala-ce-nereguli-a-gasit-noul-ministru-la-metrorex-si-ce-masuri-a-anuntat-e-strigator-la-cer-2232853",
+      },
     ],
   },
 ];

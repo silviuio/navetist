@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  NEXT_PRICE_CHANGE_DATE,
+  formatDateRoLong,
+} from "../../lib/dates";
+
 type Props = {
   value: boolean;
   onChange: (v: boolean) => void;
@@ -9,7 +14,8 @@ export default function FuturePricesToggle({ value, onChange }: Props) {
   return (
     <div className="flex items-center justify-between bg-zinc-800/60 border border-zinc-700/60 rounded-lg p-2.5 text-xs">
       <span className="text-zinc-300">
-        Calculează cu prețurile de la 1 mai 2026
+        Calculează cu prețurile de la{" "}
+        {formatDateRoLong(NEXT_PRICE_CHANGE_DATE)}
       </span>
       <button
         onClick={() => onChange(!value)}

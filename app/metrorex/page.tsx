@@ -3,13 +3,14 @@ import Link from "next/link";
 import { TrendingUp } from "lucide-react";
 import { getFaresByOperator } from "../lib/fares";
 import { getPendingChangesByOperator } from "../lib/upcomingChanges";
+import { NEXT_PRICE_CHANGE_DATE, formatDateRoLong } from "../lib/dates";
 import MetrorexFareList from "./_components/MetrorexFareList";
 
+const nextChangeLabel = formatDateRoLong(NEXT_PRICE_CHANGE_DATE);
+
 export const metadata: Metadata = {
-  title:
-    "Prețuri Metrorex 2026 — Scumpiri de la 1 mai 2026, bilete și abonamente metrou București | Navetist",
-  description:
-    "Tarife actuale Metrorex și scumpirile anunțate de la 1 mai 2026: bilet 1, 2 și 10 călătorii, abonamente 24h, 72h, săptămânal, lunar, 6 luni și anual pentru metroul din București.",
+  title: `Prețuri Metrorex 2026 — Scumpiri de la ${nextChangeLabel}, bilete și abonamente metrou București | Navetist`,
+  description: `Tarife actuale Metrorex și scumpirile anunțate de la ${nextChangeLabel}: bilet 1, 2 și 10 călătorii, abonamente 24h, 72h, săptămânal, lunar, 6 luni și anual pentru metroul din București.`,
 };
 
 const pendingChanges = getPendingChangesByOperator("metrorex");

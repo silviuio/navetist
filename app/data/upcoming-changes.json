@@ -1,12 +1,11 @@
 {
   "announcements": [
     {
-      "effectiveDate": "2026-05-01",
+      "effectiveDate": "2026-07-01",
       "operator": "metrorex",
       "operatorLabel": "Metrorex",
-      "buttonLabel": "Scumpiri anunțate de la 1 mai 2026",
       "title": "Majorare tarife metrou",
-      "announcement": "Metrorex a anunțat majorarea tarifelor de metrou, valabile de la 1 mai 2026.",
+      "intro": "Metrorex a anunțat majorarea tarifelor de metrou.",
       "note": "Elevii și studenții beneficiază în continuare de gratuitate și reducere 90%.",
       "historyHref": "/metrorex/istoric",
       "historyLabel": "Vezi evoluția prețurilor din 2000 până azi",
@@ -23,12 +22,11 @@
       ]
     },
     {
-      "effectiveDate": "2026-05-01",
+      "effectiveDate": "2026-07-01",
       "operator": "integrated",
       "operatorLabel": "Metrorex + STB",
-      "buttonLabel": "Scumpiri anunțate de la 1 mai 2026",
       "title": "Majorare tarife integrate",
-      "announcement": "Tarifele integrate Metrorex + STB au majorări anunțate de la 1 mai 2026.",
+      "intro": "Tarifele integrate Metrorex + STB au majorări anunțate.",
       "note": "Titlurile integrate rămân valabile pe metrou și pe rețeaua de suprafață STB, în limita duratei fiecărui titlu.",
       "changes": [
         { "fareId": "integrated-trip-1", "name": "1 călătorie 120 min.", "oldPrice": 7, "newPrice": 9 },

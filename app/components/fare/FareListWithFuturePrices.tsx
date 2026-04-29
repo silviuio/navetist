@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 import FareGroup from "@/app/components/fare/FareGroup";
+import {
+  NEXT_PRICE_CHANGE_DATE,
+  formatDateRoLong,
+} from "@/app/lib/dates";
 import type { Fare } from "@/app/types/fares";
 import type { PendingChanges } from "@/app/lib/upcomingChanges";
+
+const NEXT_PRICE_CHANGE_LABEL = formatDateRoLong(NEXT_PRICE_CHANGE_DATE);
 
 type Props = {
   trips: Fare[];
@@ -25,10 +31,10 @@ export default function FareListWithFuturePrices({
   alertTitle,
   alertDescription,
   currentLabel = "Prețuri actuale",
-  futureLabel = "Prețuri de la 1 mai 2026",
+  futureLabel = `Prețuri de la ${NEXT_PRICE_CHANGE_LABEL}`,
   currentDescription = "Tarifele în vigoare azi. Comută pentru a vedea cele noi.",
   futureDescription = "Vezi cum vor arăta tarifele după majorare.",
-  switchAriaLabel = "Comută între prețuri actuale și cele de la 1 mai 2026",
+  switchAriaLabel = `Comută între prețuri actuale și cele de la ${NEXT_PRICE_CHANGE_LABEL}`,
 }: Props) {
   const [useFuturePrices, setUseFuturePrices] = useState(false);
 

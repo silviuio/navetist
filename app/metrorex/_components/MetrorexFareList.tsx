@@ -1,4 +1,5 @@
 import FareListWithFuturePrices from "@/app/components/fare/FareListWithFuturePrices";
+import { NEXT_PRICE_CHANGE_DATE, formatDateRoLong } from "@/app/lib/dates";
 import type { PendingChanges } from "@/app/lib/upcomingChanges";
 import type { Fare } from "@/app/types/fares";
 
@@ -18,7 +19,7 @@ export default function MetrorexFareList({
       trips={trips}
       subscriptions={subscriptions}
       pendingChanges={pendingChanges}
-      alertTitle="Majorare tarife Metrorex de la 1 mai 2026"
+      alertTitle={`Majorare tarife Metrorex de la ${formatDateRoLong(NEXT_PRICE_CHANGE_DATE)}`}
       alertDescription="Tarifele marcate cu portocaliu vor crește. Elevii și studenții beneficiază în continuare de gratuitate și reducere 90%."
     />
   );

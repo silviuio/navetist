@@ -3,11 +3,16 @@ import InflationConclusion from "./_components/InflationConclusion";
 import PriceChart from "./_components/PriceChart";
 import PriceHistoryTable from "./_components/PriceHistoryTable";
 import { inflationDataNote } from "./_components/priceHistoryData";
+import {
+  NEXT_PRICE_CHANGE_DATE,
+  formatDateRoMonthYear,
+} from "../../lib/dates";
+
+const nextChangeMonthYear = formatDateRoMonthYear(NEXT_PRICE_CHANGE_DATE);
 
 export const metadata: Metadata = {
   title: "Evoluția prețului biletului de metrou București 2000–2026 | Navetist",
-  description:
-    "Istoricul complet al prețurilor la metroul din București: de la ~1 RON în 2000 la 7 RON din mai 2026, comparat cu inflația cumulată.",
+  description: `Istoricul complet al prețurilor la metroul din București: de la ~1 RON în 2000 la 7 RON din ${nextChangeMonthYear}, comparat cu inflația cumulată.`,
   openGraph: {
     title: "Evoluția prețului biletului de metrou București 2000–2026",
     description:
@@ -24,7 +29,7 @@ export default function MetrorexIstoricPage() {
         </h1>
         <p className="text-gray-400 text-sm max-w-xl">
           Prețul unei călătorii la metroul din București din 2000 până în
-          prezent, inclusiv majorarea anunțată pentru mai 2026.
+          prezent, inclusiv majorarea anunțată pentru {nextChangeMonthYear}.
         </p>
       </div>
 

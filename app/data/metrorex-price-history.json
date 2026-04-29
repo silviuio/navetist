@@ -8,6 +8,6 @@
     { "date": "2013-02-01", "price": 2.50, "label": "feb 2013", "note": "Creștere standardizată" },
     { "date": "2021-08-01", "price": 3.00, "label": "aug 2021", "note": "Prima majorare după ~8 ani" },
     { "date": "2025-01-01", "price": 5.00, "label": "ian 2025", "note": "Creștere majoră" },
-    { "date": "2026-05-01", "price": 7.00, "label": "mai 2026", "note": "Majorare anunțată", "upcoming": true }
+    { "date": "2026-07-01", "price": 7.00, "label": "iulie 2026", "note": "Majorare anunțată", "upcoming": true }
   ]
 }
