@@ -12,8 +12,11 @@ import type { Fare, TripFare } from "../../types/fares";
 import { durationInMonths, periodLabel, getPendingPrice, fmt } from "./utils";
 import Counter from "./Counter";
 import FuturePricesToggle from "./FuturePricesToggle";
+import BloodDonorToggle from "./BloodDonorToggle";
 import CostBreakdown from "./CostBreakdown";
 import Verdict from "./Verdict";
+
+const BLOOD_DONOR_DISCOUNT = 0.5; // -50%
 
 type SingleProps = {
   fare: Fare;
@@ -42,6 +45,7 @@ export default function BreakevenCalculator(props: Props) {
   const [stbTrips, setStbTrips] = useState(20);
   const [metroTrips, setMetroTrips] = useState(10);
   const [daysAway, setDaysAway] = useState(21);
+  const [isBloodDonor, setIsBloodDonor] = useState(false);
 
   // ── Pending prices ────────────────────────────────────────
   const farePending = getPendingPrice(fare.id);
@@ -94,9 +98,17 @@ export default function BreakevenCalculator(props: Props) {
   const period = periodLabel(fare);
   const isMultiMonth = months > 1;
   const displayUnit = isMultiMonth ? "lună" : period;
-  const basePrice = isMultiMonth
+
+  // ── Reducere donator de sânge ─────────────────────────────
+  // Activ doar pentru abonamente de 1 lună (per cerere user).
+  const showBloodDonor = months === 1;
+  const bloodDonorActive = showBloodDonor && isBloodDonor;
+  const bloodDonorMultiplier = bloodDonorActive ? 1 - BLOOD_DONOR_DISCOUNT : 1;
+
+  const rawBasePrice = isMultiMonth
     ? effectiveFarePrice / months
     : effectiveFarePrice;
+  const basePrice = rawBasePrice * bloodDonorMultiplier;
 
   // ── Vacanțe / zile fără transport ─────────────────────────
   // Activ doar la abonamente lungi (6+ luni), unde cumulat contează.
@@ -180,6 +192,13 @@ export default function BreakevenCalculator(props: Props) {
             />
           )}
 
+          {showBloodDonor && (
+            <BloodDonorToggle
+              value={isBloodDonor}
+              onChange={setIsBloodDonor}
+            />
+          )}
+
           <div>
             <p className="text-xs text-zinc-500 uppercase tracking-wide mb-2">
               Câte călătorii faci pe {displayUnit}?
@@ -225,6 +244,7 @@ export default function BreakevenCalculator(props: Props) {
             pricesUsedLabel={pricesUsedLabel}
             useFuturePrices={useFuturePrices}
             daysAway={showDaysAway ? daysAway : 0}
+            bloodDonorDiscount={bloodDonorActive}
           />
 
           <Verdict savings={savings} displayUnit={displayUnit} />
